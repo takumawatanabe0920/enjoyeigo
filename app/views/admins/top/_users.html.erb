@@ -1,0 +1,10 @@
+<% if students.any? %>
+  <% students.each do |student| %>
+  <tr>
+    <td><%= link_to "#{student.name}", admin_student_path(student) %></td>
+    <td><%= student.email %></td>
+    <td><%= student.created_at %></td>
+  </tr>
+  <%= link_to "Delete", [:admin, student], method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+  <% end %>
+<% end %>

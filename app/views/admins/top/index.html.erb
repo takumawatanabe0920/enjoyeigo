@@ -1,0 +1,28 @@
+<h1>管理者ページ</h1>
+<h3>生徒情報</h3>
+<table class="table">
+    <thead>
+        <tr>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>登録日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render 'users', students: @students %>
+    </tbody>
+</table>
+<h3>先生情報</h3>
+<table class="table">
+    <thead>
+        <tr>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>登録日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render "teachers", teachers: @teachers %>
+    </tbody>
+</table>
+</div>
