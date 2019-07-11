@@ -8,10 +8,10 @@
        </div>
        <div class="mannaka">
         <div class="panel-body">
-         <%= @teacher.name %>
-         <%= @teacher.email %>
-         <%= @teacher.created_at %>
-         <%= link_to "Delete", admins_teacher_path(@teacher), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+         <%= @student.name %>
+         <%= @student.email %>
+         <%= @student.created_at %>
+         <%= link_to "Delete", admins_student_path(@student), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
        </div>
      </div>
    </div>

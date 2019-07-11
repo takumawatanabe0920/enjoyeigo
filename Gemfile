@@ -76,3 +76,7 @@ gem "devise"
 gem 'rake', '< 11.0'
 
 gem "jquery-rails"
+
+gem "ransack"
+
+gem "kaminari"

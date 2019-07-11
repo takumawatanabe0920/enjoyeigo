@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/index'
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
 
 
   root "toppages#index"
-  resources :students, only: [:index, :show]
+  resources :students, only: [:show]
 
   namespace :admins do
     root "top#index"
@@ -19,5 +20,5 @@ Rails.application.routes.draw do
     resources :teachers
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
+  resources :searches, only: [:index]
 end

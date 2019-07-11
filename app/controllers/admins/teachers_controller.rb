@@ -14,6 +14,8 @@ class Admins::TeachersController < ApplicationController
     redirect_back(fallback_location: admins_root_path)
   end
 
+  private
+
   def find_teacher
     @teacher = Teacher.find(params[:id])
   end

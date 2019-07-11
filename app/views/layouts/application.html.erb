@@ -12,12 +12,20 @@
   </head>
 
   <body>
+    <% if current_page?("/") %>
+     <%= render 'layouts/navbar' %>
+    <% elsif current_page?("/teachernavbar") %>
+     <%= render "layouts/teachersnavbar" %>
+    <% elsif current_page?("/admins") %>
+     <%= render "layouts/adminsnavbar" %>
+    <% end %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+      <%= yield :cover %>
 
-    <%= yield :cover %>
+      <%= yield %>
 
-    <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
 </html>
