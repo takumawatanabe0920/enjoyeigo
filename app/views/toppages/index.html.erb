@@ -1,15 +1,15 @@
 <div id="wrapper">
  <div id="main">
-   <div class="container">
+   <div class="topindex">
     <div class="row">
      <aside>
       <div class="admin-user">
-        <div class="col-md-2">
+        <div class="col-lg-2">
          <%= render "layouts/teachers", teachers: @teachers %>
         </div>
       </div>
      </aside>
-     <div class="col-md-6">
+     <div class="col-lg-8">
       <section id="point">
        <h2>Enjoy lessonについて</h2>
         <section>
@@ -52,14 +52,14 @@
          <%= link_to "先生検索", searches_path %>
        </div>
       <div class="admin-user">
-       <div class="col-md-2">
+       <div class="col-lg-2">
          ranking形式
         <%= render "layouts/teachers", teachers: @teachers %>
        </div>
       </div>
     </aside>
-   </div>
-  </div>
+
+ </div>
  </div>
 </div>
 <div id="wrapper" class="clearfix">

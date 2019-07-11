@@ -1,4 +1,5 @@
 class Teachers::TeachersController < ApplicationController
+  layout "teacher"
   def index
     @teachers = Teacher.all
   end

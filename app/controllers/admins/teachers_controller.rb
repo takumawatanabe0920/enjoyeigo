@@ -1,4 +1,5 @@
 class Admins::TeachersController < ApplicationController
+  layout "admin"
   before_action :find_teacher, only: [:show, :edit]
   before_action :authenticate_admin!
   def show

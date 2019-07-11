@@ -80,3 +80,5 @@ gem "jquery-rails"
 gem "ransack"
 
 gem "kaminari"
+
+gem 'enum_help', '~> 0.0.15'

@@ -1,3 +1,15 @@
-<h1>Searches#index</h1>
-<p>Find me in app/views/searches/index.html.erb</p>
-<%= render "layouts/teachers", teachers: @teachers %>
+<div class="row">
+  <%= search_form_for(@q) do |f| %>
+   <div class="sidemenu-panel">
+     <div class="panel panel-default">
+      <div class="panel-heading">
+        検索
+      </div>
+      <div class="panel-body">
+        <%= f.text_field :name_cont, class: "form-control", placeholder: "【名前】" %>
+      </div>
+    </div>
+  </div>
+ <% end %>
+  <%= render "layouts/teachers", teachers: @teachers %>
+</div>

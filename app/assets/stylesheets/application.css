@@ -54,7 +54,6 @@
  img {
      vertical-align: bottom;
  }
-
  /* チャプター：見出しの装飾 */
  #main h2 {
      background: #fff;
@@ -71,17 +70,13 @@
  }
 
  /* チャプター：ヘッダー */
- header {
-     width: 984px;
-     margin: 0 auto;
- }
 
- header h1 {
-     margin: 5px 0 10px;
- }
+
+
 
  #global_navi {
-     margin-bottom: 16px;
+     margin: 10px 0 16px 0;
+     width: 1200px;
  }
 
  #global_navi ul {
@@ -94,7 +89,7 @@
  #global_navi ul li {
      font-size: 14px;  /* フォントサイズ復活 */
      display: inline-block;
-     width: 163px;
+     width: 195px;
      margin-right: 1px;
      text-align: center;
  }
@@ -116,14 +111,8 @@
      background-color: #fa9786;
  }
 
- #wrapper {
-     width: 984px;
-     margin: 0 auto;
- }
+ .navbar {
 
- #main {
-     width: 730px;
-     float: left;
  }
 
  #sidebar {

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'searches/index'
+
   devise_for :admins
   devise_for :teachers
   devise_for :students

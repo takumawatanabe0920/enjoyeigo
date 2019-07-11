@@ -13,16 +13,13 @@
 
   <body>
     <div class="container">
-    <%= render 'layouts/navbar' %>
+    <%= render "layouts/adminsnavbar" %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
       <%= yield :cover %>
 
       <%= yield %>
-
-
-    <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>
