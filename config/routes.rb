@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
+
     resources :teachers, only: [:index, :show]
   end
 
@@ -20,5 +21,6 @@ Rails.application.routes.draw do
     resources :teachers
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :searches, only: [:index]
+  resources :teachers, only: [:index]
+  resources :searches
 end
