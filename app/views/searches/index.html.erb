@@ -1,5 +1,6 @@
 <div class="row">
-  <%= search_form_for(@q) do |f| %>
+  <%= search_form_for(@q, url: searches_path) do |f| %>
+  <div class="col-md-6 col-md-offset-3">
    <div class="sidemenu-panel">
      <div class="panel panel-default">
       <div class="panel-heading">
@@ -13,6 +14,12 @@
       </div>
     </div>
   </div>
+ </div>
+ </div>
  <% end %>
-  <%= render "layouts/teachers", teachers: @teachers %>
-</div>
+ <div class="row">
+   <div class="col-md-12">
+     <%= render "layouts/teachers", teachers: @teachers %>
+   </div>
+ </div>
+<%= render "layouts/stationdatabody" %>

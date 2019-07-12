@@ -25,6 +25,6 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
 
   private
   def teacher_params
-    params.require(:teacher).permit(:name,  :email, :password, :password_confirmation)
+    params.require(:teacher).permit(:name,  :email, :password, :password_confirmation, :station_name, :station_cd, :line_name, :line_cd, :pref_name, :pref_cd)
   end
 end
