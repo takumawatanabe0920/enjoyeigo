@@ -82,3 +82,7 @@ gem "ransack"
 gem "kaminari"
 
 gem 'enum_help', '~> 0.0.15'
+
+gem 'jp_prefecture'
+
+gem 'simple_form'

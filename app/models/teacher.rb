@@ -4,5 +4,6 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_one :Station, dependent: :destroy
+  #has_one :station, dependent: :destroy
+  has_one :address, dependent: :destroy
 end

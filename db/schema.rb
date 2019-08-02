@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(version: 2019_07_12_021458) do
 
   create_table "stations", force: :cascade do |t|
     t.bigint "teacher_id", null: false
-    t.string "station_name", null: false
-    t.string "station_cd", null: false
-    t.string "line_name", null: false
-    t.string "line_cd", null: false
-    t.string "pref_name", null: false
-    t.string "pref_cd", null: false
+    t.integer "postcode"
+    t.integer "prefecture_code"
+    t.string "address_city"
+    t.string "address_street"
+    t.string "address_building"
+    t.string "station"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["teacher_id"], name: "index_stations_on_teacher_id"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2019_07_12_021458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "zip"
+    t.string "pref"
+    t.string "addr"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
