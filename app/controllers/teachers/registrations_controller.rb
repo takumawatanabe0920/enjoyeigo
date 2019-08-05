@@ -23,6 +23,20 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
    end
   end
 
+  def edit
+    @teacher = Teacher.find(params[:id])
+  end
+
+  def update
+    @teacher = Teacher.find(params[:id])
+    if @teacher.update_attributes(teacher_params)
+      flash[:success] = "Profile updated"
+      redirect_to admins_root_path
+    else
+      render 'edit'
+    end
+  end
+
   private
   def teacher_params
     params.require(:teacher).permit(:name,  :email, :password, :password_confirmation)

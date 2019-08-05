@@ -23,6 +23,20 @@ class Students::RegistrationsController < Devise::RegistrationsController
    end
   end
 
+  def edit
+    @student = Student.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    if @student.update_attributes(student_params)
+      flash[:success] = "Profile updated"
+      redirect_to admins_root_path
+    else
+      render 'edit'
+    end
+  end
+
   # GET /resource/edit
   # def edit
   #   super

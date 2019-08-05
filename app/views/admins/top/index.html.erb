@@ -31,5 +31,24 @@
       </table>
     </div>
   </div>
+  <div class="container">
+  <div class="row">
+   <aside class="col-md-4">
+     <%= form_for(@notification, url: admins_root_path(@notification)) do |f| %>
+       <div class="form-group">
+         <%= f.label :title, "タイトル" %>
+         <%= f.text_field :title ,class: "form-control" %>
+       </div>
+       <div class="form-group">
+         <%= f.label :content, "コンテンツ" %>
+         <%= f.text_area :content, class: 'form-control', rows: 5 %>
+       </div>
+       <%= f.submit '送信', class: 'btn btn-primary btn-block' %>
+     <% end %>
+   </aside>
+   <div class="col-xs-8">
+     <%= render 'notifications/notifications', notifications: @notifications %>
+   </div>
  </div>
+</div>
 </div>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admins do
+    get 'notification/create'
+    get 'notification/destroy'
+  end
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -21,6 +25,7 @@ Rails.application.routes.draw do
     root "top#index"
     resources :students
     resources :teachers
+    resources :notifications, only: [:create, :destroy]
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #resources :teachers, only: [:index]

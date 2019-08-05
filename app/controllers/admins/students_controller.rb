@@ -1,11 +1,20 @@
 class Admins::StudentsController < ApplicationController
   layout "admin"
-  before_action :find_student, only: [:show, :edit]
+  before_action :find_student, only: [:show, :edit, :update]
   before_action :authenticate_admin!
   def show
   end
 
   def edit
+  end
+
+  def update
+    if @student.update_attributes(student_params)
+      flash[:success] = "Profile updated"
+      redirect_to admins_root_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -18,5 +27,9 @@ class Admins::StudentsController < ApplicationController
   private
   def find_student
     @student = Student.find(params[:id])
+  end
+
+  def student_params
+    params.require(:teacher).permit(:name, :email, :password)
   end
 end

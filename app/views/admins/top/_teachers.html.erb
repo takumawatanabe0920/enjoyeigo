@@ -4,6 +4,7 @@
       <td><%= link_to "#{teacher.name}", admins_teacher_path(teacher) %></td>
       <td><%= teacher.email %></td>
       <td><%= teacher.created_at %></td>
+      <td><%= link_to "edit", edit_admins_teacher_path(teacher), class: "btn btn-warning"%></td>
       <td><%= link_to "Delete", [:admins, teacher], method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %></td>
     </tr>
   <% end %>
