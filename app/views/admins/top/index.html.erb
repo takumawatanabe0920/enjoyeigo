@@ -34,7 +34,7 @@
   <div class="container">
   <div class="row">
    <aside class="col-md-4">
-     <%= form_for(@notification, url: admins_root_path(@notification)) do |f| %>
+     <%= form_for([:admins, @notification], url: admins_root_path) do |f| %>
        <div class="form-group">
          <%= f.label :title, "タイトル" %>
          <%= f.text_field :title ,class: "form-control" %>

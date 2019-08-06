@@ -86,3 +86,7 @@ gem 'enum_help', '~> 0.0.15'
 gem 'jp_prefecture'
 
 gem 'simple_form'
+
+gem 'bootstrap-sass'
+
+gem 'jquery-rails'
