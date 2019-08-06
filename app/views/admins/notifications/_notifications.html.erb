@@ -1,18 +1,22 @@
 <ul class="media-list">
   <% notifications.each do |notification| %>
     <li class="media">
-      <div class="media-left">
-        管理者
-      </div>
       <div class="media-body">
+
         <div>
-          <%= link_to "管理者", user_path(notification.admin) %> <span class="text-muted">posted at <%= notification.created_at %></span>
+          <span class="text-muted">posted at <%= notification.created_at %></span>
         </div>
+
         <div>
           <p><%= notification.title %></p>
         </div>
         <div>
           <p><%= notification.content %></p>
+        </div>
+        <div >
+          <% if current_admin == notification.admin %>
+            <%= link_to "Delete", [:admins, notification], method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
         </div>
       </div>
     </li>

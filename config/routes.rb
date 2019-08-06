@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :admins do
-    get 'notification/create'
-    get 'notification/destroy'
-  end
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -27,7 +22,7 @@ Rails.application.routes.draw do
     resources :teachers
     resources :notifications, only: [:create, :destroy]
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+   resources :searches, only: [:index]
 
   #resources :teachers, only: [:index]
-  resources :searches
 end
