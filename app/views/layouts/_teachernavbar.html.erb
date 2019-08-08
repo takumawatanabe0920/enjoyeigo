@@ -13,12 +13,28 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if current_teacher %>
-          <%= link_to "logout", destroy_teacher_session_path, method: :delete  %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= current_teacher.name%>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'マイページ', teachers_teacher_path(current_teacher)%>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "ログアウト", destroy_teacher_session_path, method: :delete %></li>
+            </ul>
+          </li>
+          <li><%= link_to requesters_teachers_teacher_path(current_teacher) do %>
+                <i class="fas fa-bell"></i>
+              <% end %>
+          </li>
         <% else %>
-          <%= link_to "Join us", new_teacher_registration_path %>
-          <%= link_to "login", new_teacher_session_path %>
+          <li><%= link_to "Join us", new_teacher_registration_path %></li>
+          <li><%= link_to "login", new_teacher_session_path %></li>
         <% end %>
-        <%= link_to "生徒はこちらをクリック！", root_path %>
+        <li><%= link_to "生徒はこちらをクリック！", root_path %></li>
 
       </ul>
       </div>

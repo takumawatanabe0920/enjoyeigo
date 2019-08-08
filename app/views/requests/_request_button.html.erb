@@ -1,0 +1,12 @@
+
+<% if current_student.requesting?(teacher) %>
+  <%= form_for(current_student.requests.find_by(teacher_id: teacher.id), html: { method: :delete}) do |f| %>
+    <%= hidden_field_tag :teacher_id, teacher.id %>
+    <%= f.submit "リクエスト解除", class: "btn btn-danger btn-block" %>
+  <% end %>
+<% else %>
+  <%= form_for(current_student.requests.build) do |f| %>
+    <%= hidden_field_tag :teacher_id, teacher.id %>
+    <%= f.submit "リクエスト", class: "btn btn-primary btn-block" %>
+  <% end %>
+<% end %>

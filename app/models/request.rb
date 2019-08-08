@@ -1,4 +1,4 @@
-class Relationship < ApplicationRecord
+class Request < ApplicationRecord
   belongs_to :student
   belongs_to :teacher
 end

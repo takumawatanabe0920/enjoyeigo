@@ -8,5 +8,11 @@ class Teachers::TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
   end
 
-  
+  def requesters
+    @teacher = Teacher.find(params[:id])
+    @requesters = @teacher.requesters.page(params[:page])
+    counts(@teacher)
+  end
+
+
 end

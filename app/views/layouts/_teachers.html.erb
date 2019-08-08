@@ -9,8 +9,10 @@
       <div class="panel-body">
       <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %>
       </div>
+
+      <%= render "requests/request_button", teacher: teacher %>
     </div>
   </div>
-  
+
   <% end %>
 <% end %>

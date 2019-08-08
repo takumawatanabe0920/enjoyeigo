@@ -5,23 +5,19 @@ class Student < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
 
-  has_many :relationships
-  has_many :followings, through: :relationships, source: :teacher
-  has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'teacher_id', dependent: :destroy
-  has_many :followers, through: :reverses_of_relationship, source: :student
+  has_many :requests
+  has_many :requestings, through: :requests, source: :teacher
 
-  def follow(other_teacher)
-    unless self == other_student
-      self.relationships.find_or_create_by(teacher_id: other_student.id)
-    end
+  def request(teacher)
+    self.requests.find_or_create_by(teacher_id: teacher.id)
   end
 
-  def unfollow(other_teacher)
-    relationship = self.relationships.find_by(teacher_id: other_student.id)
-    relationship.destroy if relationship
+  def unrequest(teacher)
+    request = self.requests.find_by(teacher_id: teacher.id)
+    request.destroy if request
   end
 
-  def following?(other_teacher)
-    self.followings.include?(other_teacher)
+  def requesting?(teacher)
+    self.requestings.include?(teacher)
   end
 end

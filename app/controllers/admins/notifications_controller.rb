@@ -22,6 +22,6 @@ class Admins::NotificationsController < ApplicationController
   private
 
   def notification_params
-    params.require(:notification).permit(:title, :content)
+    params.require(:notification).permit(:title, :content).merge(admin_id: params[:admin_id])
   end
 end
