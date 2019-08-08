@@ -26,7 +26,8 @@
               <li><%= link_to "ログアウト", destroy_teacher_session_path, method: :delete %></li>
             </ul>
           </li>
-          <li><%= link_to requesters_teachers_teacher_path(current_teacher) do %>
+          <li>
+              <%= link_to requesters_teachers_teacher_path(current_teacher.students) do %>
                 <i class="fas fa-bell"></i>
               <% end %>
           </li>

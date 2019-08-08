@@ -1,7 +1,7 @@
 <% if students.any? %>
   <% students.each do |student| %>
   <tr>
-    <td><%= link_to "#{student.name}", admins_student_path(student) %></td>
+    <td><%= link_to "#{student.name}", student_path(student) %></td>
     <td><%= student.email %></td>
     <td><%= student.created_at %></td>
     <td>リクエスト承認</td>

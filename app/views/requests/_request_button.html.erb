@@ -1,4 +1,4 @@
-
+<% if student_signed_in? %>
 <% if current_student.requesting?(teacher) %>
   <%= form_for(current_student.requests.find_by(teacher_id: teacher.id), html: { method: :delete}) do |f| %>
     <%= hidden_field_tag :teacher_id, teacher.id %>
@@ -9,4 +9,5 @@
     <%= hidden_field_tag :teacher_id, teacher.id %>
     <%= f.submit "リクエスト", class: "btn btn-primary btn-block" %>
   <% end %>
+<% end %>
 <% end %>

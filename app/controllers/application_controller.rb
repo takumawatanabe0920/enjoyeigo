@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def counts(student)
-    @count_requestings = student.requestings.count
-  end
+  #def counts(student)
+    #@count_requestings = student.requestings.count
+  #end
 
   #def counts(teacher)
     #@count_requesters = teacher.requesters.count
@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
       teachers_root_path
     elsif current_student
       root_path
+    elsif current_admin
+      admins_root_path
     end
   end
 
