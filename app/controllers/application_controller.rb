@@ -2,21 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  #def counts(student)
-    #@count_requestings = student.requestings.count
-  #end
+  def counts(student)
+    @count_requestings = student.requestings.count
+  end
 
   #def counts(teacher)
     #@count_requesters = teacher.requesters.count
   #end
 
-  def after_sign_in_path_for(resource)
-    if current_teacher
-      teachers_root_path
-    elsif current_student
-      root_path
-    elsif current_admin
+  def after_sign_in_path_for(resource_or_scope)
+    if resource_or_scope.is_a?(Admin)
       admins_root_path
+    elsif resource_or_scope.is_a?(Teacher)
+      teachers_root_path
+    else
+      root_path
     end
   end
 

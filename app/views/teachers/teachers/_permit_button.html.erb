@@ -1,0 +1,13 @@
+<% if teacher_signed_in? %>
+ <% if current_teacher.permits?(student) %>
+  <%= form_for(current_teacher.relationships.find_by(student_id: student.id), html: { method: :delete}) do |f| %>
+    <%= hidden_field_tag :student_id, student.id %>
+    <%= f.submit "リクエスト拒否", class: "btn btn-danger btn-block" %>
+  <% end %>
+<% else %>
+  <%= form_for(current_teacher.relationships.build) do |f| %>
+    <%= hidden_field_tag :student_id, student.id %>
+    <%= f.submit "リクエスト承認", class: "btn btn-primary btn-block" %>
+  <% end %>
+ <% end %>
+<% end %>

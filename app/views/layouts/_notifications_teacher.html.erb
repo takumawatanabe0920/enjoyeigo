@@ -1,0 +1,14 @@
+<ul class="media-list">
+  <% notifications.each do |notification| %>
+    <li class="media">
+      <div class="media-body">
+        <div>
+          <p>タイトル：<%= notification.title %></p>
+        </div>
+        <div>
+          <p><%= time_ago_in_words(notification.created_at) %>前に通知</p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

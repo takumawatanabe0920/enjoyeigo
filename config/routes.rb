@@ -7,15 +7,18 @@ Rails.application.routes.draw do
   namespace :teachers do
     root "teachers#index"
 
-    resources :requests, only: [:index]
-
     resources :teachers, only: [:index, :show] do
-      get :requesters, on: :member
+      member do
+       get :requesters
+      end
+
     end
+
+    resources :permits, only: [:create, :destroy]
 
     resources :profiles, only: [:show, :new, :create]
   end
-
+  resources :relationships, only: [:create, :destroy]
 
   root "toppages#index"
 

@@ -2,6 +2,7 @@ class Teachers::TeachersController < ApplicationController
   layout "teacher"
   def index
     @teachers = Teacher.all
+    @notifications = Notification.all
   end
 
   def show
@@ -9,8 +10,8 @@ class Teachers::TeachersController < ApplicationController
   end
 
   def requesters
-    @student= Student.find(params[:id])
-    @requesters = @student.requesters.page(params[:page])
+    @teacher = Teacher.find(params[:id])
+    @requesters = @teacher.requesters.page(params[:page])
   end
 
 

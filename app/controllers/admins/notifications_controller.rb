@@ -1,5 +1,5 @@
 class Admins::NotificationsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destory]
+  before_action :authenticate_admin!, only: [:create, :destory]
   def create
     @notification = current_admin.notifications.build(notification_params)
     if @notification.save
