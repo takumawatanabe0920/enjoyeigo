@@ -9,4 +9,9 @@ class StudentsController < ApplicationController
     @requestings = @student.requestings.page(params[:page])
     counts(@student)
   end
+
+  def permiters
+    @student = Student.find(params[:id])
+    @permiters = @student.permiters.page(params[:page])
+  end
 end

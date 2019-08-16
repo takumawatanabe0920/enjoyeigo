@@ -31,6 +31,10 @@
                 <i class="fas fa-bell"></i>
               <% end %>
           </li>
+          <li><%= link_to permiters_student_path(current_student) do %>
+                <i class="far fa-comment-dots"></i>
+              <% end %>
+          </li>
         <% else %>
           <li><%= link_to "新規登録", new_student_registration_path %></li>
           <li><%= link_to "ログイン", new_student_session_path %></li>

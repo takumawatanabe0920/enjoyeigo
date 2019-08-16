@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(version: 2019_08_09_070913) do
     t.string "prefecture"
     t.string "line"
     t.string "station"
+    t.string "s0"
+    t.string "s1"
+    t.string "address1"
+    t.string "address2"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
