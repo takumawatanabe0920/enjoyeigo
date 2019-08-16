@@ -1,5 +1,5 @@
 <% if teacher_signed_in? %>
-  <%= form_for(current_teacher.reverses_of_request.find_by(student_id: student.id), html: { method: :delete}) do |f| %>
+  <%= form_for(current_teacher.reverses_of_request.find_by(student_id: student.id),url: relationship_path(student), html: { method: :delete}) do |f| %>
     <%= hidden_field_tag :student_id, student.id %>
     <%= f.submit "リクエスト拒否", class: "btn btn-danger" %>
   <% end %>

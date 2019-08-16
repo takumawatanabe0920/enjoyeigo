@@ -20,7 +20,7 @@ class Teacher < ApplicationRecord
   end
 
   def reject(student)
-    relationship = self.relationships.find_by(student_id: student.id)
+    relationship = self.reverses_of_request.find_by(student_id: student.id)
     relationship.destroy if relationship
   end
 
