@@ -1,36 +1,35 @@
+<div class="row">
+  <div class="col-xs-offset-3 col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">会員登録</div>
+      <div class="panel-body">
+
 <%= form_for(@student, url: admins_student_path(@student), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: @student %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.label :name, "名前" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" , class: 'form-control'%>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.label :billing, "課金" %>
+    <%= f.check_box :billing,:as => :boolean %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "更新" , class: 'btn btn-success'%>
   </div>
 <% end %>
 
 <%= link_to "Back", :back %>
+
+   </div>
+  </div>
+ </div>
+</div>

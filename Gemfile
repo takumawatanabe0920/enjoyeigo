@@ -49,6 +49,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "letter_opener"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  gem 'hirb'
+  gem 'hirb-unicode'
 end
 
 gem "bcrypt", "~> 3.1.7"

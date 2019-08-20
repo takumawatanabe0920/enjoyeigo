@@ -11,6 +11,7 @@
          <%= @student.name %>
          <%= @student.email %>
          <%= @student.created_at %>
+         <%= @student.billing %>
          <%= link_to "Delete", admins_student_path(@student), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
        </div>
      </div>

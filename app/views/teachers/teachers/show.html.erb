@@ -14,6 +14,13 @@
          都道府県：<%= @teacher.pref %>
          市区町村<%= @teacher.addr %>
        </div>
+       <div>
+         <% if @student.billing? %>
+          課金情報
+         <% else %>
+          ここからは課金ユーザーしか見れない
+         <% end %>
+       </div>
      </div>
    </div>
   </div>

@@ -26,5 +26,9 @@ class Student < ApplicationRecord
     self.requestings.include?(teacher)
   end
 
+  def permiters?(teacher)
+    self.permiters.include?(teacher)
+  end
+
 
 end

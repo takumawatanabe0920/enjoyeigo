@@ -4,6 +4,12 @@
     <td><%= link_to "#{student.name}", admins_student_path(student) %></td>
     <td><%= student.email %></td>
     <td><%= student.created_at %></td>
+    <td><% if student.billing? %>
+      課金中
+    <% else %>
+      無課金
+    <% end %>
+    </td>
     <td><%= link_to "edit", edit_admins_student_path(student), class: "btn btn-warning" %></td>
     <td><%= link_to "Delete", [:admins, student], method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %></td>
   </tr>

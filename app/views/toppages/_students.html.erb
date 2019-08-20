@@ -5,9 +5,7 @@
         <tr>
            <td><%= link_to "#{student.name}", student_path(student) %></td>
            <td><%= time_ago_in_words(current_teacher.reverses_of_request.find_by(student_id: student.id).created_at) %></td>
-           <% unless current_teacher.permits?(student)%>
-             <td><%= render "teachers/teachers/permit_button", student: student  %></td>
-           <% end %>
+           <td><%= render "teachers/teachers/permit_button", student: student  %></td>
         </tr>
     <% end %>
   <% end %>

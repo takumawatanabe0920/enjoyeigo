@@ -1,8 +1,7 @@
-<ul>
- <% notifications.each do |notification| %>
-   <li>
-     <a href="#">タイトル：<%= notification.title %></a>
-     <span><%= time_ago_in_words(notification.created_at) %></span>
-   </li>
- <% end %>
-</ul>
+<% @notifications.each do |notification| %>
+  <li>
+    <a href="#">タイトル：<%= notification.title %></a>
+    <span><%= time_ago_in_words(notification.created_at) %></span>
+  </li>
+  <li role="separator" class="divider"></li>
+<% end %>

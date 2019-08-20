@@ -7,9 +7,14 @@
        </div>
        <div class="mannaka">
         <div class="panel-body">
-         <%= @student.name %>
-         <%= @student.email %>
-         <%= @student.created_at %>
+         名前：<%= @student.name %>
+         メール：<%= @student.email %>
+         登録日時：<%= @student.created_at %>
+         <% if @student.billing? %>
+           課金中
+         <% else %>
+           無課金
+         <% end %>
        </div>
      </div>
    </div>
