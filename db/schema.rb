@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_064110) do
+ActiveRecord::Schema.define(version: 2019_08_21_030201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "zip"
+    t.string "pref"
+    t.string "city"
+    t.string "addr"
+    t.bigint "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_addresses_on_teacher_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,6 +38,17 @@ ActiveRecord::Schema.define(version: 2019_08_19_064110) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "phonenumber"
+    t.string "mailaddress1"
+    t.string "mailaddress2"
+    t.boolean "phonecall"
+    t.bigint "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_contacts_on_teacher_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "content"
     t.string "title"
@@ -34,6 +56,16 @@ ActiveRecord::Schema.define(version: 2019_08_19_064110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_notifications_on_admin_id"
+  end
+
+  create_table "personalinfos", force: :cascade do |t|
+    t.string "national"
+    t.integer "sex"
+    t.date "birthday"
+    t.bigint "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_personalinfos_on_teacher_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -82,13 +114,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_064110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.string "zip"
-    t.string "pref"
-    t.string "addr"
-    t.string "prefecture"
-    t.string "line"
-    t.string "station"
-    t.boolean "billing", default: false
+    t.boolean "billing"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
@@ -106,21 +132,14 @@ ActiveRecord::Schema.define(version: 2019_08_19_064110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.string "zip"
-    t.string "pref"
-    t.string "addr"
-    t.string "prefecture"
-    t.string "line"
-    t.string "station"
-    t.string "s0"
-    t.string "s1"
-    t.string "address1"
-    t.string "address2"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "teachers"
+  add_foreign_key "contacts", "teachers"
   add_foreign_key "notifications", "admins"
+  add_foreign_key "personalinfos", "teachers"
   add_foreign_key "relationships", "students"
   add_foreign_key "relationships", "teachers"
   add_foreign_key "requests", "students"

@@ -94,4 +94,6 @@ gem 'simple_form'
 
 gem 'bootstrap-sass'
 
-gem 'jquery-rails'
+gem  "pry-byebug"
+
+#gem "pry-rails", group: [:development, :test]

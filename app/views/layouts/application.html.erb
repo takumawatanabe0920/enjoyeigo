@@ -6,16 +6,16 @@
     <%= csp_meta_tag %>
 
     <%= render "layouts/stationdata" %>
-    <script type="text/javascript" src="http://express.heartrails.com/api/express.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" >
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
   </head>
 
-  <body onload="HRELoadPrefecture('prefecture', 'line', 'station');">
+  <body>
     <div class="container">
     <%= render 'layouts/navbar' %>
 
@@ -25,7 +25,7 @@
 
       <%= yield %>
 
-      <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
 
     <%= render 'layouts/footer' %>
     </div>

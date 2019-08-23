@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_notification
+
   def show
     @student = Student.find(params[:id])
     @requests = @student.requests.order('created_at DESC').page(params[:page])
@@ -14,11 +14,5 @@ class StudentsController < ApplicationController
   def permiters
     @student = Student.find(params[:id])
     @permiters = @student.permiters.page(params[:page])
-  end
-
-  private
-
-  def set_notification
-    @notifications = Notification.all
   end
 end

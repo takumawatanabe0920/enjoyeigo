@@ -7,19 +7,38 @@
        </div>
        <div class="mannaka">
         <div class="panel-body">
-         氏名：<%= @teacher.name %>
-         メールアドレス：<%= @teacher.email %>
-         登録日時：<%= @teacher.created_at %>
-         郵便番号：<%= @teacher.zip %>
-         都道府県：<%= @teacher.pref %>
-         市区町村<%= @teacher.addr %>
+         氏名：<%= @teacher.name %><br>
+         メールアドレス：<%= @teacher.email %><br>
+         登録日時：<%= @teacher.created_at %><br>
+         電話番号：<%= @teacher.contact.phonenumber %><br>
+         メールアドレス(pc)：<%= @teacher.contact.mailaddress1 %><br>
+         メールアドレス２：<%= @teacher.contact.mailaddress2 %><br>
+         郵便番号：<%= @teacher.address.zip %><br>
+         都道府県：<%= @teacher.address.pref %><br>
+         市区町村：<%= @teacher.address.city %><br>
+         それ以下：<%= @teacher.address.addr %><br>
+         出身国：<%= @teacher.personalinfo.national %><br>
+         性別：<% if @teacher.personalinfo.sex == 1 %>
+                男
+              <% elsif @teacher.personalinfo.sex == 2 %>
+                女
+              <% else %>
+                おかま
+              <% end %><br>
+         誕生日：<%= @teacher.personalinfo.birthday %><br>
+
        </div>
+
        <div>
-         <% if @student.billing? %>
-          課金情報
+        <% if current_student  %>
+         <% if current_student.billing %>
+          課金しているためこの情報を見ることができています。
          <% else %>
-          ここからは課金ユーザーしか見れない
+          ここから先は有料会員です。
          <% end %>
+        <% elsif current_teacher %>
+          有料ページ
+        <% end %>
        </div>
      </div>
    </div>

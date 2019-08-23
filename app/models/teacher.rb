@@ -5,7 +5,12 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   #has_one :station, dependent: :destroy
-  has_one :address, dependent: :destroy
+  has_one :address, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :address
+  has_one :contact, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :contact
+  has_one :personalinfo, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :personalinfo
 
   has_many :relationships, dependent: :destroy
   has_many :permits, through: :relationships, source: :student
@@ -27,4 +32,5 @@ class Teacher < ApplicationRecord
   def permits?(student)
     self.permits.include?(student)
   end
+
 end

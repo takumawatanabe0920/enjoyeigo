@@ -33,18 +33,6 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    郵便番号: 〒 <%= f.text_field :zip, name: :zip, onKeyUp: "AjaxZip3.zip2addr(this,'pref','addr');" %><br>
-    都道府県:    <%= f.text_field :pref, name: :pref, size: 30 %><br>
-    市区町村番地など:  <%= f.text_field :addr, name: :addr, size: 60 %>
-  </div>
-
-  <div class="form-group">
-    <%= f.select :prefecture,[["都道府県を選択してください"],["北海道"]], onchange: "HREOnChangePrefecture();" %><br>
-    <%= f.select :line,["路線を選択してください"], onchange: "HREOnChangeline();" %><br>
-    <%= f.select :station, ["駅を選択してください"], onchange: "HREOnChangestation(); "%>
-  </div>
-
   <div class="text-right">
     <%= f.submit "登録する", class: 'btn btn-success' %>
   </div>

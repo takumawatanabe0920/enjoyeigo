@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_notification
 
   def counts(student)
     @count_requestings = student.requestings.count
@@ -27,9 +28,16 @@ class ApplicationController < ActionController::Base
   protected
 
  def configure_permitted_parameters
-    added_attrs = [ :name, :email, :password, :password_confirmation, :zip, :addr, :pref, :prefecture, :line, :station, :billing]
+    added_attrs = [ :name, :email, :password, :password_confirmation, :billing, contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], address_attributes:[:id, :zip, :pref, :city, :addr], personalinfo_attributes:[:id, :national, :sex, :birthday]]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
   end
+
+  private
+
+  def set_notification
+    @notifications = Notification.all
+  end
+
 end

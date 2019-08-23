@@ -22,6 +22,7 @@
               <li>
                 <%= link_to 'マイページ', teachers_teacher_path(current_teacher)%>
               </li>
+              <li><%= link_to 'プロフィール設定', edit_teachers_profile_path(current_teacher)%></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "ログアウト", destroy_teacher_session_path, method: :delete %></li>
             </ul>

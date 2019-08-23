@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  namespace :teachers do
+    get 'profiles/new'
+    get 'profiles/create'
+  end
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -6,18 +11,15 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
-
-    resources :teachers, only: [:index, :show, :edit] do
+    resources :profiles, only: [:edit, :update]
+    resources :teachers, only: [:index, :show, :edit, :update] do
       member do
        get :requesters
        get :permits
       end
-
     end
 
     resources :permits, only: [:create, :destroy]
-
-    resources :profiles, only: [:show, :new, :create]
   end
   resources :relationships, only: [:create, :destroy]
 
