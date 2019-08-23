@@ -46,7 +46,7 @@
 
       <div class="field">
         <%= a.label :zip, "郵便番号" %><br>
-        <%= a.text_field :zip, size:9, maxlength:7, onKeyUp:"AjaxZip3.zip2addr(this,'','pref','city','addr');" %>
+        <%= a.text_field :zip, size:9, maxlength:8, onKeyUp:"AjaxZip3.zip2addr(this,'','teacher[address_attributes][pref]','teacher[address_attributes][city]','teacher[address_attributes][addr]');" %>
       </div>
       <div class="field">
         <%= a.label :pref, "都道府県" %><br>
@@ -58,7 +58,7 @@
       </div>
       <div class="field">
         <%= a.label :addr, "それ以下(アパートなど)" %><br>
-        <%= a.text_field :addr, size:40 %>
+        <%= a.text_field :addr,  size:40 %>
       </div>
 
   <% end %>

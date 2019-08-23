@@ -1,13 +1,13 @@
 class Teachers::ProfilesController < ApplicationController
   def new
-    @teacher = Teacher.new
-    @teacher.build_contact
+    #@teacher = Teacher.new
+    #@teacher.build_contact
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
-    @teacher.save
-    redirect_to teachers_teacher_path(@teacher)
+    #@teacher = Teacher.new(teacher_params)
+    #@teacher.save
+    #redirect_to teachers_teacher_path(@teacher)
   end
 
   def edit
@@ -15,7 +15,6 @@ class Teachers::ProfilesController < ApplicationController
     @teacher.contact = Contact.new if @teacher.contact.blank?
     @teacher.address = Address.new if @teacher.address.blank?
     @teacher.personalinfo = Personalinfo.new if @teacher.personalinfo.blank?
-
   end
 
   def update
