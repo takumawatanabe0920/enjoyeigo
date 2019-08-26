@@ -1,15 +1,4 @@
 class Station < ApplicationRecord
-  #belongs_to :teacher
-  belongs_to :teacher
-
-  include JpPrefecture
-  jp_prefecture :prefecture_code
-
-  def prefecture_name
-    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
-  end
-
-  def prefecture_name=(prefecture_name)
-    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
-  end
+  has_many :reverses_of_teacher_station ,class_name: "TeacherStation", foreign_key: 'station_id', dependent: :destroy
+  has_many :teachers, through: :reverses_of_teacher_station, source: :teacher
 end

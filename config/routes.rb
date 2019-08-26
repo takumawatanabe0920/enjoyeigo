@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :teachers do
-    get 'profiles/new'
-    get 'profiles/create'
-  end
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -26,13 +21,14 @@ Rails.application.routes.draw do
   root "toppages#index"
 
   resources :students, only: [:show] do
+
     member do
       get :requestings
       get :permiters
     end
   end
-
   resources :requests, only: [:create, :destroy]
+
 
   namespace :admins do
     root "top#index"

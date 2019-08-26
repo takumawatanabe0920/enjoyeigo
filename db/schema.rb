@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_030201) do
+ActiveRecord::Schema.define(version: 2019_08_26_021107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,16 +89,11 @@ ActiveRecord::Schema.define(version: 2019_08_21_030201) do
   end
 
   create_table "stations", force: :cascade do |t|
-    t.bigint "teacher_id", null: false
-    t.integer "postcode"
-    t.integer "prefecture_code"
-    t.string "address_city"
-    t.string "address_street"
-    t.string "address_building"
+    t.string "prefecture"
+    t.string "line"
     t.string "station"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["teacher_id"], name: "index_stations_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -117,6 +112,16 @@ ActiveRecord::Schema.define(version: 2019_08_21_030201) do
     t.boolean "billing"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+  end
+
+  create_table "teacher_stations", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "station_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_teacher_stations_on_station_id"
+    t.index ["teacher_id", "station_id"], name: "index_teacher_stations_on_teacher_id_and_station_id", unique: true
+    t.index ["teacher_id"], name: "index_teacher_stations_on_teacher_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -144,5 +149,6 @@ ActiveRecord::Schema.define(version: 2019_08_21_030201) do
   add_foreign_key "relationships", "teachers"
   add_foreign_key "requests", "students"
   add_foreign_key "requests", "teachers"
-  add_foreign_key "stations", "teachers"
+  add_foreign_key "teacher_stations", "stations"
+  add_foreign_key "teacher_stations", "teachers"
 end

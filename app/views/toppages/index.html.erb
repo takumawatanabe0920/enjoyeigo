@@ -5,7 +5,7 @@
      <aside>
       <div class="admin-user">
         <div class="col-lg-2">
-         <%= render "layouts/teachers", teachers: @teachers %>
+         <%= render "students/teachers", teachers: @teachers %>
         </div>
       </div>
      </aside>
@@ -37,7 +37,7 @@
       <div class="admin-user">
        <div class="col-lg-2">
          ranking形式
-        <%= render "layouts/teachers", teachers: @teachers %>
+        <%= render "students/teachers", teachers: @teachers %>
        </div>
       </div>
     </aside>
@@ -45,13 +45,15 @@
  </div>
 </div>
 
-<input type="text" name="zip" size="9" maxlength="7" onKeyUp="AjaxZip3.zip2addr(this,'','pref', 'city', 'addr');">
-<!-- ▼住所入力フィールド(都道府県) -->
-<input type="text" name="pref" size="20">
-<!-- ▼住所入力フィールド(都道府県以降の住所) -->
-<input type="text" name="city" size="20">
-
-<input type="text" name="addr" size="40">
+<select id="prefecture" name="prefecture" onchange="HREOnChangePrefecture();">
+<option value="都道府県を選択してください">都道府県を選択してください</option>
+</select>
+<select id="line" name="line" onchange="HREOnChangeLine();">
+<option value="路線を選択してください">路線を選択してください</option>
+</select>
+<select id="station" name="station">
+<option value="駅を選択してください">駅を選択してください</option>
+</select>
 
 <div id="wrapper" class="clearfix">
   <div class="container">

@@ -19,6 +19,10 @@ class Teacher < ApplicationRecord
   has_many :reverses_of_request, class_name: 'Request', foreign_key: 'teacher_id', dependent: :destroy
   has_many :requesters, through: :reverses_of_request, source: :student
 
+  has_many :teacher_stations, dependent: :destroy
+  has_many :stations, through: :teacher_stations, source: :station
+  accepts_nested_attributes_for :teacher_stations, allow_destroy: true
+
 
   def permit(student)
     self.relationships.find_or_create_by(student_id: student.id)
