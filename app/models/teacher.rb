@@ -37,4 +37,12 @@ class Teacher < ApplicationRecord
     self.permits.include?(student)
   end
 
+  def station(station)
+    self.teacher_stations.find_or_create_by(station_id: station.id)
+  end
+
+  def stations?(station)
+    self.stations.include?(station)
+  end
+
 end

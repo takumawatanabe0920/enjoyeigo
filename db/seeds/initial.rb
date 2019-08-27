@@ -1,53 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-=begin
-require "csv"
-CSV.foreach('db/seeds_data/station_201804/pref.csv', headers: true) do |row|
-  Pref.create(
-    pref_cd: row["pref_cd"],
-    pref_name: row["pref_name"]
-  )
-end
 
-CSV.foreach('db/seeds_data/station_201804/company.csv', headers: true) do |row|
-  Company.create(
-    company_cd: row["company_cd"],
-    company_name: row["company_name"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/join.csv', headers: true) do |row|
-  Join.create(
-    line_cd: row["line_cd"],
-    station_cd1: row["station_cd1"],
-    station_cd2: row["station_cd2"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/line.csv', headers: true) do |row|
-  Line.create(
-    line_cd: row["line_cd"],
-    company_cd: row["company_cd"],
-    line_name: row["line_name"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/station.csv', headers: true) do |row|
-  Station.create(
-    station_cd: row["station_cd"],
-    station_name: row["station_name"],
-    line_cd: row["line_cd"],
-    pref_cd: row["pref_cd"]
-  )
-end
-
-=end
-require "csv"
 
 Prefecture.find_or_create_by(id: 1, name: '北海道')
 Prefecture.find_or_create_by(id: 2, name: '青森県')
@@ -114,8 +65,9 @@ if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count
   lines.each do |line|
     saved_line = StationLine.create({
       name: line['line_name'].to_s,
-      company_id: companies[line['company_cd']],
-
+      company: companies[line['company_cd']],
+      latitude: line['lat'].to_f,
+      longitude: line['lon'].to_f
     })
     db_lines[line['line_cd']] = saved_line[:id]
   end
@@ -125,7 +77,8 @@ if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count
       name: station['station_name'].to_s,
       prefecture_id: station['pref_cd'].to_i,
       station_line_id: db_lines[station['line_cd']].to_i,
-
+      latitude: station['lat'].to_f,
+      longitude: station['lon'].to_f
     })
     db_stations[station['station_cd']] = saved_station[:id]
   end
@@ -133,15 +86,13 @@ if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count
     saved_join = StationJoin.create({
       station_line_id: db_lines[join['line_cd']].to_i,
       station_id: db_stations[join['station_cd1']].to_i,
-
+      next_station_id: db_stations[join['station_cd2']].to_i
     })
   end
 
-  =begin
   Prefecture.cached_all.each do |pref|
     Station.where(prefecture_id: pref.id).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl|
       StationLinePrefecture.create!(station_line: sl, prefecture: pref)
     end
   end
-  =end
 end

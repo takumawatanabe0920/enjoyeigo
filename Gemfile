@@ -97,3 +97,5 @@ gem 'bootstrap-sass'
 gem  "pry-byebug"
 
 gem "pry-rails", group: [:development, :test]
+
+gem 'seed-fu', '~> 2.3'

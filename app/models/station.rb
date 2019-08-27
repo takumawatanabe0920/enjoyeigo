@@ -1,4 +1,6 @@
 class Station < ApplicationRecord
-  has_many :reverses_of_teacher_station ,class_name: "TeacherStation", foreign_key: 'station_id', dependent: :destroy
-  has_many :teachers, through: :reverses_of_teacher_station, source: :teacher
+  belongs_to :prefecture
+  belongs_to :station_line
+
+  has_many :station_joins
 end
