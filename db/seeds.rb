@@ -5,48 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-=begin
-require "csv"
-CSV.foreach('db/seeds_data/station_201804/pref.csv', headers: true) do |row|
-  Pref.create(
-    pref_cd: row["pref_cd"],
-    pref_name: row["pref_name"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/company.csv', headers: true) do |row|
-  Company.create(
-    company_cd: row["company_cd"],
-    company_name: row["company_name"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/join.csv', headers: true) do |row|
-  Join.create(
-    line_cd: row["line_cd"],
-    station_cd1: row["station_cd1"],
-    station_cd2: row["station_cd2"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/line.csv', headers: true) do |row|
-  Line.create(
-    line_cd: row["line_cd"],
-    company_cd: row["company_cd"],
-    line_name: row["line_name"]
-  )
-end
-
-CSV.foreach('db/seeds_data/station_201804/station.csv', headers: true) do |row|
-  Station.create(
-    station_cd: row["station_cd"],
-    station_name: row["station_name"],
-    line_cd: row["line_cd"],
-    pref_cd: row["pref_cd"]
-  )
-end
-
-=end
 require "csv"
 
 Prefecture.find_or_create_by(id: 1, name: '北海道')
@@ -98,7 +56,7 @@ Prefecture.find_or_create_by(id: 46, name: '鹿児島県')
 Prefecture.find_or_create_by(id: 47, name: '沖縄県')
 
 # 駅情報初期化
-if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count == 0
+if Station.all.count == 0 && StationLine.all.count == 0
   # ActiveRecord::Base.connection.execute('set foreign_key_checks = 0')
   # ActiveRecord::Base.connection.execute('TRUNCATE TABLE `stations`')
   # ActiveRecord::Base.connection.execute('TRUNCATE TABLE `station_joins`')
@@ -109,16 +67,32 @@ if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count
   companies = CSV.parse(File.read(dir_path + 'company.csv'), headers: true).pluck('company_cd', 'company_name').to_h
   stations = CSV.parse(File.read(dir_path + 'station.csv'), headers: true)
   lines = CSV.parse(File.read(dir_path + 'line.csv'), headers: true)
-  joins = CSV.parse(File.read(dir_path + 'join.csv'), headers: true)
+
+  db_companies = {}
+  companies.each do |company|
+
+    saved_company = Company.create({
+      id: company['company_cd'].to_i,
+      name: company['company_name'].to_s
+    })
+    db_companies[company['company_cd']] = saved_company[:id]
+
+  end
+
+
   db_lines = {}
   lines.each do |line|
     saved_line = StationLine.create({
       name: line['line_name'].to_s,
-      company_id: companies[line['company_cd']],
-
+      company_id: companies[line['company_cd']]
     })
     db_lines[line['line_cd']] = saved_line[:id]
   end
+
+
+
+
+
   db_stations = {}
   stations.each do |station|
     saved_station = Station.create({
@@ -129,19 +103,10 @@ if Station.all.count == 0 && StationLine.all.count == 0 && StationJoin.all.count
     })
     db_stations[station['station_cd']] = saved_station[:id]
   end
-  joins.each do |join|
-    saved_join = StationJoin.create({
-      station_line_id: db_lines[join['line_cd']].to_i,
-      station_id: db_stations[join['station_cd1']].to_i,
 
-    })
-  end
-
-  =begin
-  Prefecture.cached_all.each do |pref|
+  Prefecture.all.each do |pref|
     Station.where(prefecture_id: pref.id).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl|
       StationLinePrefecture.create!(station_line: sl, prefecture: pref)
     end
   end
-  =end
 end

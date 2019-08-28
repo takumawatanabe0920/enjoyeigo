@@ -100,15 +100,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_055846) do
     t.index ["teacher_id"], name: "index_requests_on_teacher_id"
   end
 
-  create_table "station_joins", force: :cascade do |t|
-    t.bigint "station_line_id", null: false
-    t.bigint "station_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["station_id"], name: "index_station_joins_on_station_id"
-    t.index ["station_line_id"], name: "index_station_joins_on_station_line_id"
-  end
-
   create_table "station_line_prefectures", force: :cascade do |t|
     t.bigint "station_line_id", null: false
     t.bigint "prefecture_id", null: false
@@ -189,8 +180,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_055846) do
   add_foreign_key "relationships", "teachers"
   add_foreign_key "requests", "students"
   add_foreign_key "requests", "teachers"
-  add_foreign_key "station_joins", "station_lines"
-  add_foreign_key "station_joins", "stations"
   add_foreign_key "station_lines", "companies"
   add_foreign_key "stations", "prefectures"
   add_foreign_key "stations", "station_lines"
