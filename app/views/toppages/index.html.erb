@@ -5,7 +5,7 @@
      <aside>
       <div class="admin-user">
         <div class="col-lg-2">
-         <%= render "students/teachers", teachers: @teachers %>
+         <%= render "layouts/teachers", teachers: @teachers %>
         </div>
       </div>
      </aside>
@@ -37,7 +37,7 @@
       <div class="admin-user">
        <div class="col-lg-2">
          ranking形式
-        <%= render "students/teachers", teachers: @teachers %>
+        <%= render "layouts/teachers", teachers: @teachers %>
        </div>
       </div>
     </aside>
@@ -45,15 +45,6 @@
  </div>
 </div>
 
-<select id="prefecture" name="prefecture" onchange="HREOnChangePrefecture();">
-<option value="都道府県を選択してください">都道府県を選択してください</option>
-</select>
-<select id="line" name="line" onchange="HREOnChangeLine();">
-<option value="路線を選択してください">路線を選択してください</option>
-</select>
-<select id="station" name="station">
-<option value="駅を選択してください">駅を選択してください</option>
-</select>
 
 <div id="wrapper" class="clearfix">
   <div class="container">

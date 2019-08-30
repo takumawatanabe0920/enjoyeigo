@@ -83,19 +83,26 @@
           date_separator: '/') %>
       </div>
   <% end %>
-
-  <%= f.fields_for :teacher_stations do |ts| %>
-  <h3>駅</h3>
-    <%= ts.hidden_field :id %>
+  <%= f.fields_for :prefecture do |pr| %>
     <div class="field">
-      <%= ts.collection_select :station_id, ts.object.selectable_stations, :id, :prefecture, {}, onchange:"HREOnChangePrefecture();" %><br>
+      <%= pr.label :prefecture, "都道府県" %>
+      <%= pr.collection_select(:name, Prefecture.all, :id, :name) %>
     </div>
-    <div class="field">
-      <%= ts.collection_select :station_id, ts.object.selectable_stations, :id, :line, {}, onchange:"HREOnChangeLine();" %><br>
-    </div>
-    <div class="field">
-      <%= ts.collection_select :station_id, ts.object.selectable_stations, :id, :station, {} %><br>
-    </div>
+    <% Station.where(prefecture_id: pr.id).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl| %>
+    <%= sl.fields_for :station_line do |stln| %>
+      <div class="field">
+        <%= stln.label :station_line, "沿線" %>
+        <%= stln.collection_select(:name, StationLine.all, :id, :name) %>
+      </div>
+      <%= stln.fields_for :station do |st| %>
+        <div class="field">
+          <%= st.label :station, "駅" %>
+          <%= st.collection_select(:name, Station.all, :id, :name) %>
+        </div>
+      <% end %>
+    <% end %>
+   <% end %>
   <% end %>
+
   <%= f.submit "edit" %>
 <% end %>

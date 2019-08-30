@@ -15,25 +15,20 @@ class Teachers::ProfilesController < ApplicationController
     @teacher.contact = Contact.new if @teacher.contact.blank?
     @teacher.address = Address.new if @teacher.address.blank?
     @teacher.personalinfo = Personalinfo.new if @teacher.personalinfo.blank?
-    @teacherstation = Form::Teacher.new if @teacherstation.blank?
+    @teacher.prefecture = Prefecture.new if @teacher.prefecture.blank?
+    @teacher.station_line = StationLine.new if @teacher.station_line.blank?
+    @teacher.station = Station.new if @teacher.station.blank?
   end
 
   def update
-    @teacherstation = Form::Teacher.new if @teacherstation.blank?
     @teacher.update(teacher_params)
-    @teacherstation.update(teacher_station_params)
     redirect_to teachers_teacher_path(@teacher)
   end
 
   private
 
   def teacher_params
-    params.require(:teacher).permit(:name, :email, :password, address_attributes:[:id, :zip, :pref, :city, :addr], contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], personalinfo_attributes:[:id, :national, :sex, :birthday], teacher_station_attributes:[:id, :teacher_id, :station_id])
+    params.require(:teacher).permit(:name, :email, :password, address_attributes:[:id, :zip, :pref, :city, :addr], contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], personalinfo_attributes:[:id, :national, :sex, :birthday], prefecture_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_attributes:[:id, :name])
   end
 
-  def teacher_station_params
-    params.require(:form_teacher).permit(Form::Teacher::REGISTRABLE_ATTRIBUTES +
-    [teacher_stations_attributes: Form::TeacherStation::REGISTRABLE_ATTRIBUTES]
-      )
-  end
 end

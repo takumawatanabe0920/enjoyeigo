@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require "csv"
 
 Prefecture.find_or_create_by(id: 1, name: '北海道')
@@ -64,15 +57,13 @@ if Station.all.count == 0 && StationLine.all.count == 0
   # ActiveRecord::Base.connection.execute('TRUNCATE TABLE `station_line_prefectures`')
   # ActiveRecord::Base.connection.execute('set foreign_key_checks = 1')
   dir_path = File.dirname(__FILE__) + '/../db/seeds_data/station_201804/'
-  companies = CSV.parse(File.read(dir_path + 'company.csv'), headers: true).pluck('company_cd', 'company_name').to_h
+  companies = CSV.parse(File.read(dir_path + 'company.csv'), headers: true)
   stations = CSV.parse(File.read(dir_path + 'station.csv'), headers: true)
   lines = CSV.parse(File.read(dir_path + 'line.csv'), headers: true)
 
   db_companies = {}
   companies.each do |company|
-
     saved_company = Company.create({
-      id: company['company_cd'].to_i,
       name: company['company_name'].to_s
     })
     db_companies[company['company_cd']] = saved_company[:id]
@@ -84,14 +75,12 @@ if Station.all.count == 0 && StationLine.all.count == 0
   lines.each do |line|
     saved_line = StationLine.create({
       name: line['line_name'].to_s,
-      company_id: companies[line['company_cd']]
+      company_id: db_companies[line['company_cd']],
     })
     db_lines[line['line_cd']] = saved_line[:id]
+
+
   end
-
-
-
-
 
   db_stations = {}
   stations.each do |station|
@@ -102,11 +91,12 @@ if Station.all.count == 0 && StationLine.all.count == 0
 
     })
     db_stations[station['station_cd']] = saved_station[:id]
+
   end
 
   Prefecture.all.each do |pref|
     Station.where(prefecture_id: pref.id).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl|
-      StationLinePrefecture.create!(station_line: sl, prefecture: pref)
+      #StationLinePrefecture.create!(station_line: sl, prefecture: pref)
     end
   end
 end

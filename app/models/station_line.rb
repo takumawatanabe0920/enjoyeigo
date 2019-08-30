@@ -1,8 +1,6 @@
 class StationLine < ApplicationRecord
-  belongs_to :company
+  belongs_to :company, optional: true
   has_many :station
 
-  has_many :station_joins
-
-  has_many :station_line_prefectures
+  belongs_to :teacher, optional: true
 end

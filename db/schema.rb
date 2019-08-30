@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_055846) do
+ActiveRecord::Schema.define(version: 2019_08_26_021107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,9 +75,11 @@ ActiveRecord::Schema.define(version: 2019_08_27_055846) do
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
+    t.bigint "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_prefectures_on_teacher_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -100,31 +102,26 @@ ActiveRecord::Schema.define(version: 2019_08_27_055846) do
     t.index ["teacher_id"], name: "index_requests_on_teacher_id"
   end
 
-  create_table "station_line_prefectures", force: :cascade do |t|
-    t.bigint "station_line_id", null: false
-    t.bigint "prefecture_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["prefecture_id"], name: "index_station_line_prefectures_on_prefecture_id"
-    t.index ["station_line_id"], name: "index_station_line_prefectures_on_station_line_id"
-  end
-
   create_table "station_lines", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "company_id", null: false
+    t.string "name"
+    t.bigint "company_id"
+    t.bigint "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_station_lines_on_company_id"
+    t.index ["teacher_id"], name: "index_station_lines_on_teacher_id"
   end
 
   create_table "stations", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "prefecture_id", null: false
-    t.bigint "station_line_id", null: false
+    t.string "name"
+    t.bigint "prefecture_id"
+    t.bigint "station_line_id"
+    t.bigint "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["prefecture_id"], name: "index_stations_on_prefecture_id"
     t.index ["station_line_id"], name: "index_stations_on_station_line_id"
+    t.index ["teacher_id"], name: "index_stations_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -176,13 +173,16 @@ ActiveRecord::Schema.define(version: 2019_08_27_055846) do
   add_foreign_key "contacts", "teachers"
   add_foreign_key "notifications", "admins"
   add_foreign_key "personalinfos", "teachers"
+  add_foreign_key "prefectures", "teachers"
   add_foreign_key "relationships", "students"
   add_foreign_key "relationships", "teachers"
   add_foreign_key "requests", "students"
   add_foreign_key "requests", "teachers"
   add_foreign_key "station_lines", "companies"
+  add_foreign_key "station_lines", "teachers"
   add_foreign_key "stations", "prefectures"
   add_foreign_key "stations", "station_lines"
+  add_foreign_key "stations", "teachers"
   add_foreign_key "teacher_stations", "stations"
   add_foreign_key "teacher_stations", "teachers"
 end

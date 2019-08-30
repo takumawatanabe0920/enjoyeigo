@@ -11,6 +11,14 @@ class Teacher < ApplicationRecord
   accepts_nested_attributes_for :contact
   has_one :personalinfo, dependent: :destroy, autosave: true
   accepts_nested_attributes_for :personalinfo
+  has_one :prefecture, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :prefecture
+  has_one :station_line, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :station_line
+  has_one :station, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :station
+
+
 
   has_many :relationships, dependent: :destroy
   has_many :permits, through: :relationships, source: :student
@@ -19,9 +27,6 @@ class Teacher < ApplicationRecord
   has_many :reverses_of_request, class_name: 'Request', foreign_key: 'teacher_id', dependent: :destroy
   has_many :requesters, through: :reverses_of_request, source: :student
 
-  has_many :teacher_stations, dependent: :destroy
-  has_many :stations, through: :teacher_stations, source: :station
-  accepts_nested_attributes_for :teacher_stations, allow_destroy: true
 
 
   def permit(student)
@@ -37,12 +42,6 @@ class Teacher < ApplicationRecord
     self.permits.include?(student)
   end
 
-  def station(station)
-    self.teacher_stations.find_or_create_by(station_id: station.id)
-  end
-
-  def stations?(station)
-    self.stations.include?(station)
-  end
+  
 
 end

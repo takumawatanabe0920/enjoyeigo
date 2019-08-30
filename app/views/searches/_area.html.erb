@@ -1,0 +1,18 @@
+<% Prefecture.all.each.with_index(1) do |p, i| %>
+  <%= i %>
+  <%= link_to p.name %>
+  <% break if i== 3 %>
+
+  <% Station.where(prefecture_id: p.id).includes(:station_line).map { |s| s.station_line }.uniq.each.with_index(1) do |sl, ii| %>
+  <%= ii %>
+  <%= sl.name %>
+  <% break if ii==3 %>
+
+    <% sl.station.each.with_index(1) do |psl, iii| %>
+      <%= iii %>
+      <%= psl.name %>
+      <% break if iii===3 %>
+    <% end %>
+
+  <% end %>
+<% end %>
