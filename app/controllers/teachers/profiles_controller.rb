@@ -18,6 +18,7 @@ class Teachers::ProfilesController < ApplicationController
     @teacher.prefecture = Prefecture.new if @teacher.prefecture.blank?
     @teacher.station_line = StationLine.new if @teacher.station_line.blank?
     @teacher.station = Station.new if @teacher.station.blank?
+
   end
 
   def update
@@ -28,7 +29,7 @@ class Teachers::ProfilesController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit(:name, :email, :password, address_attributes:[:id, :zip, :pref, :city, :addr], contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], personalinfo_attributes:[:id, :national, :sex, :birthday], prefecture_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_line_attributes:[:id, :name], station_attributes:[:id, :name])
+    params.require(:teacher).permit(:name, :email, :password, address_attributes:[:id, :zip, :pref, :city, :addr], contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], personalinfo_attributes:[:id, :national, :sex, :birthday], prefecture_attributes:[:id, :name],  station_line_attributes:[:id, :name], station_attributes:[:id, :name])
   end
 
 end

@@ -84,25 +84,25 @@
       </div>
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
-    <div class="field">
-      <%= pr.label :prefecture, "都道府県" %>
-      <%= pr.collection_select(:name, Prefecture.all, :id, :name) %>
-    </div>
-    <% Station.where(prefecture_id: pr.id).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl| %>
-    <%= sl.fields_for :station_line do |stln| %>
-      <div class="field">
-        <%= stln.label :station_line, "沿線" %>
-        <%= stln.collection_select(:name, StationLine.all, :id, :name) %>
-      </div>
-      <%= stln.fields_for :station do |st| %>
-        <div class="field">
-          <%= st.label :station, "駅" %>
-          <%= st.collection_select(:name, Station.all, :id, :name) %>
-        </div>
+   <div id="cat">
+     <%= pr.label :name, "都道府県" %>
+     <%= pr.select :name, Prefecture.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.prefecture, include_blank: true }, {id: "l_prefecture"} %>
+   </div>
+     <% if Station.where(prefecture_id: @m_cat).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl| %>
+      <%= f.fields_for :station_line do |sl| %>
+       <%= sl.label :name %>
+       <%= sl.select :name, StationLine.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station_line, include_blank: true }, {id: "l_station_line"} %>
+
+       <%= sl.fields_for :station do |st| %>
+         <%= st.label :name, "駅" %>
+         <%= st.select :name, Station.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station, include_blank: true }, {id: "l_station"} %>
+       <% end %>
       <% end %>
     <% end %>
-   <% end %>
   <% end %>
 
+<% end %>
+<div class="field">
   <%= f.submit "edit" %>
+</div>
 <% end %>

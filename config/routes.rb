@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
-    resources :profiles, only: [:edit, :update]
+    resources :profiles, only: [:edit, :update] do
+      collection do
+        get 'search'
+      end
+    end
+
     resources :teachers, only: [:index, :show, :edit, :update] do
       member do
        get :requesters
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
 
     resources :permits, only: [:create, :destroy]
   end
+
   resources :relationships, only: [:create, :destroy]
 
   root "toppages#index"
