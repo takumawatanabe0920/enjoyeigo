@@ -88,9 +88,8 @@
      <%= pr.label :name, "都道府県" %>
      <%= pr.select :name, Prefecture.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.prefecture, include_blank: true }, {id: "l_prefecture"} %>
    </div>
-     <% if Station.where(prefecture_id: @m_cat).includes(:station_line).map { |s| s.station_line }.uniq.each do |sl| %>
       <%= f.fields_for :station_line do |sl| %>
-       <%= sl.label :name %>
+       <%= sl.label :name, "沿線" %>
        <%= sl.select :name, StationLine.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station_line, include_blank: true }, {id: "l_station_line"} %>
 
        <%= sl.fields_for :station do |st| %>
@@ -98,10 +97,8 @@
          <%= st.select :name, Station.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station, include_blank: true }, {id: "l_station"} %>
        <% end %>
       <% end %>
-    <% end %>
   <% end %>
 
-<% end %>
 <div class="field">
   <%= f.submit "edit" %>
 </div>

@@ -5,9 +5,9 @@ $(document).on('turbolinks:load', function() {
 
   function appendSelect(catNum) {
     if(catNum == 1) {
-      var select_id = `m_prefecture`
+      var select_id = `l_station_line`
     } else if(catNum == 2) {
-      var select_id = `s_prefecture`
+      var select_id = `l_station`
     }
     var html =
     `<select name="teacher[prefecture]" id="${select_id}">
@@ -20,9 +20,9 @@ $(document).on('turbolinks:load', function() {
   // optionを追加するHTML
   function appendCat(catOption, catNum) {
     if (catNum == 1) {
-      var appendId = $("#m_prefecture")
+      var appendId = $("#l_station_line")
     } else if (catNum == 2) {
-      var appendId = $("#s_prefecture")
+      var appendId = $("#l_station")
     }
     appendId.append(
       $("<option>")
@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function() {
   // Lカテゴリーが選択された時のアクション
   $("#l_prefecture").on('change', function() {
     l_cat = $(this).val()
-    $("#m_prefecture, #s_prefecture").remove()
+    $("#l_station_line, #l_station").remove()
 
     // ajaxでリクエストを送信
       $.ajax({
@@ -54,9 +54,9 @@ $(document).on('turbolinks:load', function() {
     })
 
 // Mカテゴリーが選択された時のアクション
-  $(document).on('change', "#m_prefecture", function() {
+  $(document).on('change', "#l_station_line", function() {
     m_cat = $(this).val()
-    $("#s_prefecture").remove()
+    $("#l_station").remove()
 
     $.ajax({
       type: "GET",
