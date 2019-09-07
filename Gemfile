@@ -98,4 +98,4 @@ gem  "pry-byebug"
 
 gem "pry-rails", group: [:development, :test]
 
-gem 'seed-fu', '~> 2.3'
+gem 'awesome_nested_set'

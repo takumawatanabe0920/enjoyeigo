@@ -84,16 +84,16 @@
       </div>
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
-   <div id="cat">
-     <%= pr.label :name, "都道府県" %>
-     <%= pr.select :name, Prefecture.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.prefecture, include_blank: true }, {id: "l_prefecture"} %>
+   <div id="field">
+     <% prefecture_options = Prefecture.all.map {|p| ["#{i.name}", p.id, data: { children1_path: ###### }]}, { selected: @teacher.prefecture, include_blank: true }} %>
+     <%= pr.select :name, prefecture_options, class: "select-parent" %>
    </div>
       <%= f.fields_for :station_line do |sl| %>
-       <%= sl.label :name, "沿線" %>
-       <%= sl.select :name, StationLine.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station_line, include_blank: true }, {id: "l_station_line"} %>
+       <% station_line_options = Station(prefecture_id: p.id).includes(:station_line).map {|s| s.station_line} %>
+       <%= sl.select :name, station_line_options , class: 'select-children1%>
 
        <%= sl.fields_for :station do |st| %>
-         <%= st.label :name, "駅" %>
+
          <%= st.select :name, Station.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station, include_blank: true }, {id: "l_station"} %>
        <% end %>
       <% end %>

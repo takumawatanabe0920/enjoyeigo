@@ -10,7 +10,7 @@ $(document).on('turbolinks:load', function() {
       var select_id = `l_station`
     }
     var html =
-    `<select name="teacher[prefecture]" id="${select_id}">
+    `<select name="teacher[station_line_attributes][name]" id="${select_id}">
         <option value>---</option>
     </select>`
     cat_seach.append(html)
