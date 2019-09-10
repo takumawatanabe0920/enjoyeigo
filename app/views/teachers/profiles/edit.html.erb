@@ -85,11 +85,11 @@
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
 
-     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", data: { children_path: teachers_profiles_path(p) }] } %>
+     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", p.id, data: { children_path: teachers_profiles_path(p) }] } %>
      <%= pr.select :name, prefecture_options, { include_blank: true }, class: "select-parent" %>
 
      <%= f.fields_for :station_line do |sl| %>
-       <% station_line_options = Station.where(prefecture_id: prefecture_options.id).includes(:station_line).map {|s| s.station_line} %>
+       <% station_line_options = Station.where(prefecture_id: 6).includes(:station_line).map {|s| s.station_line} %>
        <%= sl.select :name, station_line_options, { include_blank: true }, class: 'select-children'%>
      <% end %>
 
