@@ -84,22 +84,17 @@
       </div>
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
-   <div id="field">
-     <% prefecture_options = Prefecture.all.map {|p| ["#{i.name}", p.id, data: { children1_path: ###### }]}, { selected: @teacher.prefecture, include_blank: true }} %>
-     <%= pr.select :name, prefecture_options, class: "select-parent" %>
-   </div>
-      <%= f.fields_for :station_line do |sl| %>
-       <% station_line_options = Station(prefecture_id: p.id).includes(:station_line).map {|s| s.station_line} %>
-       <%= sl.select :name, station_line_options , class: 'select-children1%>
 
-       <%= sl.fields_for :station do |st| %>
+     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", data: { children_path: teachers_profiles_path(p) }] } %>
+     <%= pr.select :name, prefecture_options, { include_blank: true }, class: "select-parent" %>
 
-         <%= st.select :name, Station.all.map {|i| ["#{i.name}", i.id]}, { selected: @teacher.station, include_blank: true }, {id: "l_station"} %>
-       <% end %>
-      <% end %>
+     <%= f.fields_for :station_line do |sl| %>
+       <% station_line_options = Station.where(prefecture_id: prefecture_options.id).includes(:station_line).map {|s| s.station_line} %>
+       <%= sl.select :name, station_line_options, { include_blank: true }, class: 'select-children'%>
+     <% end %>
+
   <% end %>
 
-<div class="field">
   <%= f.submit "edit" %>
-</div>
+
 <% end %>

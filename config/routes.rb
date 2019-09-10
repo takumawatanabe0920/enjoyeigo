@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
-    resources :profiles, only: [:edit, :update] do
+    resources :profiles, only: [:index, :edit, :update] do
       collection do
         get 'search'
       end

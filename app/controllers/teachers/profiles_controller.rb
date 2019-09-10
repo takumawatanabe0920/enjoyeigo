@@ -1,4 +1,13 @@
 class Teachers::ProfilesController < ApplicationController
+  def index
+    prefecture = Prefecture.find(params[:prefecture_id])
+    station_line = Station(:prefecture_id).includes(:station_line).map {|s| s.station_line}
+    render json: station_line.select(:id, :name)
+    station = station_line.try(:station)
+    render json: station.select(:id, :name)
+
+  end
+
   def new
     #@teacher = Teacher.new
     #@teacher.build_contact

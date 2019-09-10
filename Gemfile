@@ -97,5 +97,3 @@ gem 'bootstrap-sass'
 gem  "pry-byebug"
 
 gem "pry-rails", group: [:development, :test]
-
-gem 'awesome_nested_set'
