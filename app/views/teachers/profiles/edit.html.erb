@@ -93,6 +93,13 @@
        <%= sl.select :name, station_line_options, { include_blank: true }, class: 'select-children'%>
      <% end %>
 
+     <%= f.fields_for :station do |ss| %>
+       <% stations = @teacher.station_line.try(:station) || [] %>
+       <% station_options = stations.map { |s| [s.name, s.id] } %>
+       <%= f.select :name, station_options, { include_blank: true }, class: "select-children" %>
+     <% end %>
+
+
   <% end %>
 
   <%= f.submit "edit" %>
