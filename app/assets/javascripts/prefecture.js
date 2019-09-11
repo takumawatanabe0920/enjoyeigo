@@ -1,3 +1,5 @@
-$("#select-parent").children(":selected").each(function(){
-  alert($(this).text());
-})
+$('select-parent').change(function() {
+        var text = $('option:selected').text();
+
+        console.log( text );
+    });
