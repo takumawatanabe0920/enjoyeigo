@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -6,13 +7,14 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
-    resources :profiles, only: [:index, :edit, :update] do
+    resources :profiles, only: [:edit, :update] do
       collection do
         get 'search'
       end
     end
 
     resources :teachers, only: [:index, :show, :edit, :update] do
+      resources :prefectures, only: [:index]
       member do
        get :requesters
        get :permits
@@ -43,4 +45,5 @@ Rails.application.routes.draw do
     resources :notifications, only: [:create, :destroy]
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
    resources :searches, only: [:index]
+
 end

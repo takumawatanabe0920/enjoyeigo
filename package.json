@@ -1,5 +1,10 @@
 {
   "name": "enjoyeigo",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-regular-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "hexo-fontawesome": "^2.0.0"
+  }
 }

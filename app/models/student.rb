@@ -13,6 +13,7 @@ class Student < ApplicationRecord
   has_many :permiters, through: :reverses_of_relationship, source: :teacher
 
 
+
   def request(teacher)
     self.requests.find_or_create_by(teacher_id: teacher.id)
   end
@@ -30,5 +31,9 @@ class Student < ApplicationRecord
     self.permiters.include?(teacher)
   end
 
+
+  def send_message(teacher, content)
+    self.from_messages.create!(to_id: teacher.id, content: content)
+  end
 
 end

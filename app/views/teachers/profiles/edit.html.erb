@@ -1,4 +1,4 @@
-<div onload="HRELoadPrefecture('prefecture', 'line', 'station');">
+
 <%= form_for @teacher, url: teachers_root_path do |f| %>
  <h3>基本情報</h3>
   <div class="field">
@@ -70,6 +70,7 @@
         <%= p.text_field :national %>
       </div>
       <div class="field">
+
         <label><%= p.radio_button :sex, 1 %> 男 </label>
         <label><%= p.radio_button :sex, 2 %> 女</label>
       <div class="field">
@@ -85,8 +86,10 @@
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
 
-     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", data: { children_path: teachers_profiles_path(p) }] } %>
-     <%= pr.select :name, prefecture_options, { include_blank: true }, class: "select-parent" %>
+    <div class="prefecture-area">
+     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", p.id, data: { children_path: teachers_teacher_prefectures_path(p) }] } %>
+     <%= pr.select :name, prefecture_options, { include_blank: true }, id: "select-parent" %>
+    </div>
 
      <%#= f.fields_for :station_line do |sl| %>
        <%# station_line_options = Station.where(prefecture_id: 6).includes(:station_line).map {|s| s.station_line} %>

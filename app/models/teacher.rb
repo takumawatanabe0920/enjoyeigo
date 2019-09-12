@@ -42,6 +42,10 @@ class Teacher < ApplicationRecord
     self.permits.include?(student)
   end
 
-  
+  def teacher_send_message(student, content)
+    self.teacher_from_messages.create!(to_id: student.id, content: content)
+  end
+
+
 
 end
