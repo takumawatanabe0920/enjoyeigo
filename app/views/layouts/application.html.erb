@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" >
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
     <script src="http://express.heartrails.com/api/express.js"></script>
 
@@ -32,5 +31,17 @@
 
     <%= render 'layouts/footer' %>
     </div>
-  </body>
+    <script>
+      var add_link = function() {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = "https://use.fontawesome.com/releases/v5.8.2/css/all.css";
+        link.crossorigin = "anonymous";
+        document.head.appendChild(link);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(add_link, 0); });
+      else window.addEventListener('load', add_link);
+    </script>
 </html>

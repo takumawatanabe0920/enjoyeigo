@@ -7,17 +7,17 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     root "teachers#index"
-    resources :profiles, only: [:edit, :update] do
-      collection do
-        get 'search'
-      end
-    end
 
     resources :teachers, only: [:index, :show, :edit, :update] do
       resources :prefectures, only: [:index]
       member do
        get :requesters
        get :permits
+      end
+    end
+    resources :profiles, only: [:edit, :update] do
+      collection do
+        get 'search'
       end
     end
 

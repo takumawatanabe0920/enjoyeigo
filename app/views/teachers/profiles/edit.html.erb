@@ -86,22 +86,21 @@
   <% end %>
   <%= f.fields_for :prefecture do |pr| %>
 
-    <div class="prefecture-area">
-     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", p.id, data: { children_path: teachers_teacher_prefectures_path(p) }] } %>
-     <%= pr.select :name, prefecture_options, { include_blank: true }, id: "select-parent" %>
+    <div id="cat">
+     <% prefecture_options = Prefecture.all.map {|p| ["#{ p.name }", p.id] } %>
+     <%= pr.select :name,  prefecture_options, { include_blank: true }, {id: "l_category"} %>
     </div>
 
-     <%#= f.fields_for :station_line do |sl| %>
-       <%# station_line_options = Station.where(prefecture_id: 6).includes(:station_line).map {|s| s.station_line} %>
-       <%#= sl.select :name, station_line_options, { include_blank: true }, class: 'select-children'%>
-     <%# end %>
+     <%= f.fields_for :station_line do |sl| %>
+       <% station_line_options = Station.where(prefecture_id: 1).includes(:station_line).map {|s| s.station_line} %>
+       <%= sl.select :name, station_line_options, { include_blank: true }, class: 'select-children'%>
+     <% end %>
 
-     <%#= f.fields_for :station do |ss| %>
-       <%# stations = @teacher.station_line.try(:station) || [] %>
-       <%# station_options = stations.map { |s| [s.name, s.id] } %>
-       <%#= f.select :name, station_options, { include_blank: true }, class: "select-children" %>
-     <%# end %>
-
+     <%= f.fields_for :station do |ss| %>
+       <% stations = @teacher.station_line.try(:station) || [] %>
+       <% station_options = stations.map { |s| [s.name, s.id] } %>
+       <%= f.select :name, station_options, { include_blank: true }, class: "select-children" %>
+     <% end %>
 
   <% end %>
 
