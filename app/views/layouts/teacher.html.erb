@@ -15,13 +15,34 @@
     <div class="container">
     <%= render "teachers/teachernavbar" %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-      <%= yield :cover %>
+    <% if current_student  %>
+      <h1>このページにアクセスすることができません</h1>
+      <ul>
+        <li>現在生徒のページでログインしているため、先生のページを閲覧することはできません。</li>
+      </ul>
+    <% else %>
 
-      <%= yield %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+        <%= yield :cover %>
 
-    <%= render 'layouts/footer' %>
+        <%= yield %>
+
+      <%= render 'layouts/footer' %>
+     <% end %>
+     <script>
+       var add_link = function() {
+         var link = document.createElement('link');
+         link.rel = 'stylesheet';
+         link.href = "https://use.fontawesome.com/releases/v5.8.2/css/all.css";
+         link.crossorigin = "anonymous";
+         document.head.appendChild(link);
+       };
+       var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+       if (raf) raf(function() { window.setTimeout(add_link, 0); });
+       else window.addEventListener('load', add_link);
+     </script>
     </div>
   </body>
 </html>

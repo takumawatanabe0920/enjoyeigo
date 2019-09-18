@@ -56,14 +56,52 @@
       </ul>
       </div>
     <nav id="global_navi">
-      <ul>
+      <ul class="nav">
         <li class="current"><a href="/">HOME</a></li>
-        <li><a href="#">サービス説明</a></li>
-        <li><a href="#">利用ガイド</a></li>
-        <li><a href="#">料金</a></li>
-        <li><a href="#">よくある質問と回答</a></li>
-        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="#">サービス説明</a>
+        <ul class="child">
+          <li><a href="#">サービスの仕組み</a></li>
+          <li><a href="#">サービスの内容</a></li>
+        </ul>
+        </li>
+        <li><a href="#">利用ガイド</a>
+        <ul class="child">
+          <li><a href="#">利用ガイドの説明</a></li>
+          <li><a href="#">利用ガイドの詳細</a></li>
+        </ul>
+        </li>
+        <li><a href="#">料金</a>
+        <ul class="child">
+          <li><a href="#">振込方法</a></li>
+          <li><a href="#">返金について</a></li>
+        </ul>
+        </li>
+        <li><a href="#">よくある質問と回答</a>
+        <ul class="child">
+          <li><a href="#">よくある質問</a></li>
+          <li><a href="#">質問と答えまとめ</a></li>
+        </ul>
+        </li>
+        <li><a href="#">お問い合わせ</a>
+        <ul class="child">
+          <li><a href="#">メール</a></li>
+          <li><a href="#">SNS</a></li>
+        </ul>
+        </li>
       </ul>
+      <script type="text/javascript">
+        $(function() {
+          var nav = $('.nav');
+          $('li', nav)
+           .mouseover(function(e) {
+            $('ul:not(:animated)', this).stop().slideDown('fast');
+            })
+             .mouseout(function(e) {
+             $('ul.child', this).stop().slideUp('fast');
+          });
+        });
+      </script>
+
     </nav>
   </nav>
 </header>

@@ -80,11 +80,21 @@
      width: 1200px;
  }
 
+ .nav {
+   /*overflow: hidden;
+     display: flex;
+     position: absolute;*/
+ }
+
  #global_navi ul {
      font-size: 0;  /* 半角スペース削除 */
      list-style: none;
      margin: 0;
      padding: 0;
+ }
+
+ ul.child {
+  /*position:relative;*/
  }
 
  #global_navi ul li {
@@ -93,6 +103,7 @@
      width: 195px;
      margin-right: 1px;
      text-align: center;
+
  }
 
  #global_navi ul li a {
@@ -263,4 +274,17 @@
 .box1 p {
     margin: 0;
     padding: 0;
+}
+.enjoyeigo {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 300px;
+  background: url("/images/enjoyeigo.jpg") center center no-repeat;
+  background-size: cover;
+}
+#enjoyeigo-word {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
 }

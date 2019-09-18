@@ -1,5 +1,7 @@
 class Teachers::TeachersController < ApplicationController
   layout "teacher"
+  before_action :not_access, except:[:index,:show]
+
 
   def index
     @teachers = Teacher.all
@@ -30,5 +32,12 @@ class Teachers::TeachersController < ApplicationController
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password, :password_confirmation)
   end
+
+  def not_access
+    if current_student
+      redirect_to root_path
+    end
+  end
+
 
 end

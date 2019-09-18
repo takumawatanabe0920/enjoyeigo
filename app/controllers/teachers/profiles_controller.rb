@@ -1,4 +1,6 @@
 class Teachers::ProfilesController < ApplicationController
+  layout "teacher"
+  before_action :not_access
 
   def new
     #@teacher = Teacher.new
@@ -31,6 +33,12 @@ class Teachers::ProfilesController < ApplicationController
 
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password, address_attributes:[:id, :zip, :pref, :city, :addr], contact_attributes:[:id, :phonenumber, :mailaddress1, :mailaddress2, :phonecall], personalinfo_attributes:[:id, :national, :sex, :birthday], prefecture_attributes:[:id, :name],  station_line_attributes:[:id, :name], station_attributes:[:id, :name])
+  end
+
+  def not_access
+    if current_student
+      redirect_to root_path
+    end
   end
 
 end

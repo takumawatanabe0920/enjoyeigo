@@ -1,2 +1,32 @@
 マッチング一覧
-<%= render "students/matchingteacher", teachers: @permiters %>
+<% if @permiters.any? %>
+  <% @permiters.each do |teacher| %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading text-center">
+      *プロフィール画像が入る
+    </div>
+    <div class="mannaka">
+      <div class="panel-body">
+      <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %>
+
+      <% if @isRoom == true %>
+        <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+      <% else %>
+        <%= form_for @room do |f| %>
+          <%= fields_for @entry do |e| %>
+            <%= e.hidden_field :teacher_id, value: @permiter.id %>
+          <% end %>
+          <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
+        <% end %>
+      <% end %>
+      <% end %>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+<% end %>
