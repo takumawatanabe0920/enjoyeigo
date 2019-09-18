@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'messages/create'
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -47,6 +48,6 @@ Rails.application.routes.draw do
    resources :searches, only: [:index]
 
 resources :messages, only: [:create]
-resources :rooms, only: [:create,:show]
+resources :rooms, only: [:create,:show, :index]
 
 end

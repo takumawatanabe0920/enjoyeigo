@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
   def permiters
     @student = Student.find(params[:id])
     @permiters = @student.permiters.page(params[:page])
-    @permiters.each {|permiter| @permiter = permiter }
+    @permiters.each {|permiter| @permiter.id = permiter.id }
     @currentStudentEntry = Entry.where(student_id: current_student.id)
     @teacherEntry = Entry.where(teacher_id: @permiter.id)
     @currentStudentEntry.each do |ct|
