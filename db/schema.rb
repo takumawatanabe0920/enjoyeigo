@@ -56,13 +56,12 @@ ActiveRecord::Schema.define(version: 2019_09_17_054841) do
   end
 
   create_table "entries", force: :cascade do |t|
-    t.string "messagable_type"
-    t.bigint "messagable_id"
+    t.string "entryable_type"
+    t.bigint "entryable_id"
     t.bigint "room_id"
-    t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["messagable_type", "messagable_id"], name: "index_entries_on_messagable_type_and_messagable_id"
+    t.index ["entryable_type", "entryable_id"], name: "index_entries_on_entryable_type_and_entryable_id"
     t.index ["room_id"], name: "index_entries_on_room_id"
   end
 
@@ -70,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_054841) do
     t.string "messagable_type"
     t.bigint "messagable_id"
     t.bigint "room_id"
-    t.text "message"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["messagable_type", "messagable_id"], name: "index_messages_on_messagable_type_and_messagable_id"

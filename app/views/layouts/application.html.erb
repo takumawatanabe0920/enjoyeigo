@@ -7,28 +7,34 @@
 
     <%= render "layouts/stationdata" %>
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
     <script src="http://express.heartrails.com/api/express.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" charset="UTF-8"></script>
 
 
 
   </head>
 
   <body>
-   <div class="container">
+   <div class="container" id="container">
    <%= render 'layouts/navbar' %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
       <%= yield :cover %>
 
+
       <%= yield %>
 
 
-
+    <p id="toPageTop"><a href="#container"><img src="images/toppage.png" height="25" width="100"></a></p>
     <%= render 'layouts/footer' %>
     <script>
       var add_link = function() {
@@ -42,6 +48,15 @@
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       if (raf) raf(function() { window.setTimeout(add_link, 0); });
       else window.addEventListener('load', add_link);
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $("#toPageTop a").click(function(){
+
+          return false;
+        });
+
+      });
     </script>
     </div>
   </body>

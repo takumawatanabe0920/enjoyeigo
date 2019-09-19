@@ -13,7 +13,10 @@ class Student < ApplicationRecord
   has_many :permiters, through: :reverses_of_relationship, source: :teacher
 
   has_many :messages, :as => :messagable
-  has_many :smessages, through: :messages, :source => :messagable, :source_type => 'Student'
+  has_many :smessages, through: :messages, :source => :messagable, :source_type => 'Teacher'
+
+  has_many :entries, :as => :entryable
+  has_many :sentries, through: :entries, :source => :entryable, :source_type => "Teacher"
 
 
 

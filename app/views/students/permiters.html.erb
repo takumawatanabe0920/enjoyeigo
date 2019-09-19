@@ -15,7 +15,7 @@
       <% else %>
         <%= form_for @room do |f| %>
           <%= fields_for @entry do |e| %>
-            <%= e.hidden_field :teacher_id, value: @permiter.id %>
+            <%= e.hidden_field :entryable_id, value: teacher.id %>
           <% end %>
           <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
         <% end %>
