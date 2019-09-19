@@ -28,10 +28,10 @@ class Teacher < ApplicationRecord
   has_many :requesters, through: :reverses_of_request, source: :student
 
   has_many :messages, :as => :messagable
-  has_many :tmessages, through: :messages, :source => :messagable, :source_type => 'Student'
+  has_many :tmessages, through: :messages, :source => :messagable, :source_type => Student
 
   has_many :entry, :as => :entryable
-  has_many :tentries, through: :entries, :source => :entryable, :source_type => "Student"
+  has_many :tentries, through: :entries, :source => :entryable, :source_type => Student
 
   validates :name, presence: true
 
