@@ -30,8 +30,8 @@ class Teacher < ApplicationRecord
   has_many :messages, :as => :messagable
   has_many :tmessages, through: :messages, :source => :messagable, :source_type => Student
 
-  has_many :entry, :as => :entryable
-  has_many :tentries, through: :entries, :source => :entryable, :source_type => Student
+  has_many :rooms, dependent: :destroy
+  has_many :trooms, through: :rooms, source: :student
 
   validates :name, presence: true
 

@@ -15,8 +15,9 @@ class Student < ApplicationRecord
   has_many :messages, :as => :messagable
   has_many :smessages, through: :messages, :source => :messagable, :source_type => Teacher
 
-  has_many :entries, :as => :entryable
-  has_many :sentries, through: :entries, :source => :entryable, :source_type => Teacher
+  has_many :rooms, dependent: :destroy
+  has_many :srooms, through: :rooms, source: :teacher
+
 
 
 
