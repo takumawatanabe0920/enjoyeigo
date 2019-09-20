@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+require "pry"
 
   def show
     @student = Student.find(params[:id])
@@ -12,24 +13,24 @@ class StudentsController < ApplicationController
   end
 
   def permiters
+
     @student = Student.find(params[:id])
     @permiters = @student.permiters.page(params[:page])
-    @currentStudentEntry = Entry.where(entryable_id: current_student.id)
-    @teacherEntry = Entry.where(entryable_id: @permiters)
-    unless @permiters == current_student.id
-      @currentStudentEntry.each do |ct|
-        @teacherEntry.each do |t|
-          if ct.room_id == t.room_id then
-            @isRoom = true
-            @roomId = ct.room_id
-          end
+    @permiter = @permiters.find(params[:id])
+    
+    @studentRoom = Room.where(student_id: current_student.id)
+    @teacherRoom = Room.where(teacher_id: @permiter.id)
+    @studentRoom.each do |sr|
+      @teacherRoom.each do |t|
+        if sr.id == t.id then
+          @isRoom = true
+          @roomId = sr.id
         end
       end
-      if @isRoom
-      else
-        @room = Room.new
-        @entry = Entry.new
-      end
+    end
+    if @isRoom
+    else
+      @room = Room.new
     end
   end
 end

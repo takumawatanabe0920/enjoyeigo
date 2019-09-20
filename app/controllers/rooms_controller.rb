@@ -1,20 +1,15 @@
 class RoomsController < ApplicationController
 
   def create
-    @room = Room.create
-    @entry1 = Entry.create(room_id: @room.id, entryable_id: current_student.id)
-    @entry2 = Entry.create(params.require(:entry).permit(:entryable_id, :room_id).merge(room_id: @room.id))
+    teachers = current_student.permiters
+    teacher = teachers.find(params[:id])
+    @room = current_student.sroom(teacher.id)
     redirect_to "/rooms/#{@room.id}"
   end
 
   def show
     @room = Room.find(params[:id])
-    if Entry.where(entryable_id: current_student.id,room_id: @room.id).present?
-      @messages = @room.messages
-      @message = Message.new
-      @entries = @room.entries
-    else
-      redirect_back(fallback_location: root_path)
-    end
+    @message = Message.new
+    #@messages = @room.messages
   end
 end

@@ -1,7 +1,6 @@
 マッチング一覧
 <% if @permiters.any? %>
   <% @permiters.each do |teacher| %>
-
   <div class="panel panel-default">
     <div class="panel-heading text-center">
       *プロフィール画像が入る
@@ -9,18 +8,20 @@
     <div class="mannaka">
       <div class="panel-body">
       <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %>
-
       <% if @isRoom == true %>
-        <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+        <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
       <% else %>
-        <%= form_for @room do |f| %>
-          <%= fields_for @entry do |e| %>
-            <%= e.hidden_field :entryable_id, value: teacher.id %>
-          <% end %>
-          <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
-        <% end %>
-      <% end %>
-      <% end %>
+      <%= form_for(current_student.rooms.build) do |f| %>
+        <%= f.hidden_field :teacher_id, :value=> teacher.id %>
+        <%= f.submit "チャットを始める" %>
+     <% end %>
+     <% end %>
+     
+
+
+<%= link_to "一覧に戻る", root_path %>
+
+
       </div>
 
 
@@ -29,4 +30,5 @@
 
 
 
+  <% end %>
 <% end %>

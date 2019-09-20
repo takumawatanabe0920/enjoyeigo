@@ -46,4 +46,8 @@ class Student < ApplicationRecord
     self.from_messages.create!(to_id: teacher.id, content: content)
   end
 
+  def sroom(teacher)
+    self.rooms.find_or_create_by(teacher_id: teacher.id)
+  end
+
 end

@@ -54,6 +54,10 @@ class Teacher < ApplicationRecord
     self.teacher_from_messages.create!(to_id: student.id, content: content)
   end
 
+  def troom(student)
+    self.rooms.find_or_create_by(student_id: student.id)
+  end
+
 
 
 end

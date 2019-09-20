@@ -3,12 +3,12 @@
 </div>
 
 <h4 class="rooms-title">マッチング中</h4>
-<% @entries.each do |e| %>
+<% @rooms.each do |r| %>
   <div class="student-name">
     <strong>
       顔画像
-      <a class="rooms-teacher-link" href="/teachers/teachers/<%= e. entryable_id %>"></a>
-      <%= e.entryable_type %>さん
+      <a class="rooms-teacher-link" href="/teachers/teachers/<%= r.teacher_id%>"></a>
+      <%= t.teacher_id %>さん
     </strong>
   </div>
 <% end %>
