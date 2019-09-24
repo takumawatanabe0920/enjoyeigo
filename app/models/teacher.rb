@@ -27,11 +27,8 @@ class Teacher < ApplicationRecord
   has_many :reverses_of_request, class_name: 'Request', foreign_key: 'teacher_id', dependent: :destroy
   has_many :requesters, through: :reverses_of_request, source: :student
 
-  has_many :messages, :as => :messagable
-  has_many :tmessages, through: :messages, :source => :messagable, :source_type => Student
-
-  has_many :rooms, dependent: :destroy
-  has_many :trooms, through: :rooms, source: :student
+  has_many :messages, dependent: :destroy
+  has_many :tmessages, through: :messages, source: :student
 
   validates :name, presence: true
 

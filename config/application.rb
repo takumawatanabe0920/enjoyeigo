@@ -17,6 +17,8 @@ module Enjoyeigo
 
     #config.i18n.default_locale = :ja
     config.i18n.fallbacks = [:ja]
+    
+    config.time_zone = 'Tokyo'
 
 
     config.action_controller.action_on_unpermitted_parameters = :raise

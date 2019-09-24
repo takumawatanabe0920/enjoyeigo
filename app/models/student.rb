@@ -12,12 +12,9 @@ class Student < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'student_id', dependent: :destroy
   has_many :permiters, through: :reverses_of_relationship, source: :teacher
 
-  has_many :messages, :as => :messagable
-  has_many :smessages, through: :messages, :source => :messagable, :source_type => Teacher
-
-  has_many :rooms, dependent: :destroy
-  has_many :srooms, through: :rooms, source: :teacher
-
+  has_many :messages, dependent: :destroy
+  has_many :smessages, through: :messages, source: :teacher
+  
 
 
 
@@ -39,15 +36,6 @@ class Student < ApplicationRecord
 
   def permiters?(teacher)
     self.permiters.include?(teacher)
-  end
-
-
-  def send_message(teacher, content)
-    self.from_messages.create!(to_id: teacher.id, content: content)
-  end
-
-  def sroom(teacher)
-    self.rooms.find_or_create_by(teacher_id: teacher.id)
   end
 
 end

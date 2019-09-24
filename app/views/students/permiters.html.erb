@@ -7,16 +7,30 @@
     </div>
     <div class="mannaka">
       <div class="panel-body">
-      <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %>
-      <% if @isRoom == true %>
-        <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
-      <% else %>
-      <%= form_for(current_student.rooms.build) do |f| %>
-        <%= f.hidden_field :teacher_id, :value=> teacher.id %>
-        <%= f.submit "チャットを始める" %>
-     <% end %>
-     <% end %>
-     
+      <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %><br>
+      <% if @messages.any? %>
+        <% @messages.each do |message| %>
+          <%= message.message %><br>
+          <%= message.created_at.strftime("%m-%d %H:%M") %><br>
+        <% end %>
+      <% end %>
+
+      <%= form_for(@message) do |f| %>
+        <%= f.hidden_field :teacher_id, :value=>  teacher.id %>
+        <%= f.text_field :message %>
+        <%= f.submit "送信" %>
+      <% end %>
+      <!--
+      <%# if @isRoom == true %>
+        <p><a href="/rooms/<%#= @roomId %>">チャットへ</a>
+      <%# else %>
+      <%#= form_for(current_student.rooms.build) do |f| %>
+        <%#= f.hidden_field :teacher_id, :value=> teacher.id %>
+        <%#= f.submit "チャットを始める" %>
+     <%# end %>
+     -->
+     <%# end %>
+
 
 
 <%= link_to "一覧に戻る", root_path %>

@@ -1,17 +1,15 @@
 class MessagesController < ApplicationController
+  require "pry"
   before_action :authenticate_student!, :only => [:create]
 
   def create
-    if Room.where(student_id: current_student.id, room_id: params[:message][:room_id]).present?
-      @message = Message.create(messages_params)
-      redirect_to "/rooms/#{@message.room_id}"
-    else
-      redirect_back(fallback_location: root_path)
-    end
+    @message = current_student.messages.create(messages_params)
+    redirect_to root_path
+    
   end
 
   private
   def messages_params
-    params.require(:message).permit(:student_id, :teacher_id, :content, :room_id).merge(student_id: current_student.id, teacher_id: )
+    params.require(:message).permit(:teacher_id, :message).merge(student_id: current_student.id)
   end
 end

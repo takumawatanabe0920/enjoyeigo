@@ -1,4 +1,4 @@
 class Message < ApplicationRecord
-  belongs_to :messagable, polymorphic: true
-  belongs_to :room
+  belongs_to :student
+  belongs_to :teacher
 end
