@@ -9,7 +9,7 @@
       <div class="panel-body">
       <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %><br>
       <% if @messages.any? %>
-        <% @messages.each do |message| %>
+        <% @messages.where(teacher_id: teacher.id).each do |message| %>
           <%= message.message %><br>
           <%= message.created_at.strftime("%m-%d %H:%M") %><br>
         <% end %>

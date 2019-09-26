@@ -27,8 +27,8 @@ class Teacher < ApplicationRecord
   has_many :reverses_of_request, class_name: 'Request', foreign_key: 'teacher_id', dependent: :destroy
   has_many :requesters, through: :reverses_of_request, source: :student
 
-  has_many :messages, dependent: :destroy
-  has_many :tmessages, through: :messages, source: :student
+  has_many :reverses_of_message, class_name: 'Message', foreign_key: 'teacher_id'
+  has_many :tmessages, through: :reverses_of_message, source: :student_id
 
   validates :name, presence: true
 
@@ -50,11 +50,6 @@ class Teacher < ApplicationRecord
   def teacher_send_message(student, content)
     self.teacher_from_messages.create!(to_id: student.id, content: content)
   end
-
-  def troom(student)
-    self.rooms.find_or_create_by(student_id: student.id)
-  end
-
 
 
 end

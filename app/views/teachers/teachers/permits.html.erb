@@ -1,2 +1,28 @@
-マッチング一覧
-<%= render "teachers/teachers/matchingstudents", students: @permits %>
+<% if @permits.any? %>
+  <% @permits.each do |student| %>
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        *プロフィール画像が入る
+      </div>
+      <div class="mannaka">
+        <div class="panel-body">
+          <%= link_to "#{student.name}", student_path(student) %><br>
+          <%= time_ago_in_words(current_teacher.relationships.find_by(student_id: student.id).created_at) %>
+          <% if @messages.any? %>
+            <% @messages.each do |message| %>
+              <%= message.message %><br>
+              <%= message.created_at.strftime("%m-%d %H:%M") %><br>
+            <% end %>
+          <% end %>
+          <%= link_to "一覧に戻る", teachers_root_path %>
+
+          <%= form_for [:teachers, @message] do |f|%>
+            <%= f.hidden_field :student_id, :value=>  student.id %>
+            <%= f.text_field :message %>
+            <%= f.submit "送信" %>
+          <% end %>
+       </div>
+     </div>
+    </div>
+  <% end %>
+<% end %>

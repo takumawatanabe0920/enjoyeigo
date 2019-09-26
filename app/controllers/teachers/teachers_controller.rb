@@ -1,4 +1,5 @@
 class Teachers::TeachersController < ApplicationController
+  require "pry"
   layout "teacher"
   before_action :not_access, except:[:index,:show]
 
@@ -23,8 +24,11 @@ class Teachers::TeachersController < ApplicationController
   end
 
   def permits
-    @teacher = Teacher.find(params[:id])
-    @permits = @teacher.permits.page(params[:page])
+    @permits = current_teacher.permits.page(params[:page])
+    @message = Message.new
+    @teacher = current_teacher
+    @messages = current_teacher.reverses_of_message
+    @sendmessages = Message.all.where(teacher_id: current_teacher.id)
   end
 
   private

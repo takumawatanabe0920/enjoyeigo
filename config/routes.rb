@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     root "teachers#index"
 
     resources :teachers, only: [:index, :show, :edit, :update] do
+      resources :messages, only: [:create]
       resources :prefectures, only: [:index]
       member do
        get :requesters
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
   end# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
    resources :searches, only: [:index]
 
-resources :messages, only: [:create]
-resources :rooms, only: [:create,:show, :index]
+   resources :messages, only: [:create]
+
 
 end

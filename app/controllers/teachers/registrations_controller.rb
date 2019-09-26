@@ -16,7 +16,7 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
 
    if @teacher.save
      flash[:success] = "登録しました"
-     redirect_to root_url
+     redirect_to teachers_root_path
    else
      flash.now[:danger] = "登録に失敗しました"
      render :new
