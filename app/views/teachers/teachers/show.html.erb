@@ -10,7 +10,7 @@
          氏名：<%= @teacher.name %><br>
          メールアドレス：<%= @teacher.email %><br>
          登録日時：<%= @teacher.created_at %><br>
-         <% if current_teacher %>
+         <%# if current_teacher %>
          電話番号：<%= @teacher.contact.phonenumber %><br>
          メールアドレス(pc)：<%= @teacher.contact.mailaddress1 %><br>
          メールアドレス２：<%= @teacher.contact.mailaddress2 %><br>
@@ -31,7 +31,7 @@
          都道府県：<%= @teacher.prefecture.name %><br>
          沿線：<%= @teacher.station_line.name %>
          駅：<%= @teacher.station.name %>
-         <% end %>
+         <%# end %>
        </div>
 
        <div>

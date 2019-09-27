@@ -42,7 +42,7 @@
 
                 <!--メッセージ１（左側）-->
             <% if @receivemessages.any? %>
-              <% @receivemessages.where(user_type: "Teacher", teacher_id: teacher.id).each do |message| %>
+              <% @receivemessages.where(:user_type => "Teacher", :teacher_id => teacher.id).each do |message| %>
                 <div class="bms_message bms_left">
                     <div class="bms_message_box">
                         <div class="bms_message_content">
@@ -59,7 +59,7 @@
 
                 <!--メッセージ２（右側）-->
               <% if @sendmessages.any? %>
-                <% @sendmessages.where(user_type: "Student", teacher_id: teacher.id).each do |message| %>
+                <% @sendmessages.where(teacher_id: teacher.id).each do |message| %>
                 <div class="bms_message bms_right">
                     <div class="bms_message_box">
                         <div class="bms_message_content">

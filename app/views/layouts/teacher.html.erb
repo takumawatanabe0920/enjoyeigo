@@ -15,13 +15,14 @@
     <div class="container">
     <%= render "teachers/teachernavbar" %>
 
-    <% if current_student  %>
+    <!--
+    <%# if current_student  %>
       <h1>このページにアクセスすることができません</h1>
       <ul>
         <li>現在生徒のページでログインしているため、先生のページを閲覧することはできません。</li>
       </ul>
-    <% else %>
-
+    <%# else %>
+    -->
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
         <%= yield :cover %>
@@ -29,7 +30,7 @@
         <%= yield %>
 
       <%= render 'layouts/footer' %>
-     <% end %>
+     <%# end %>
      <script>
        var add_link = function() {
          var link = document.createElement('link');

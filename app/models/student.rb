@@ -14,7 +14,7 @@ class Student < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :smessages, through: :messages, source: :teacher
-  
+
 
 
 
@@ -35,5 +35,6 @@ class Student < ApplicationRecord
   def permiters?(teacher)
     self.permiters.include?(teacher)
   end
+
 
 end

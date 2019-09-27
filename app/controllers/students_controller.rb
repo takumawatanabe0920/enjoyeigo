@@ -15,7 +15,7 @@ require "pry"
   def permiters
     @permiters = current_student.permiters.page(params[:page])
     @message = Message.new
-    @sendmessages =  current_student.messages
-    @receivemessages = Message.all.where(student_id: current_student.id)
+    @sendmessages =  current_student.messages.order("created_at ASC")
+    @receivemessages = Message.order("created_at ASC").where(student_id: current_student.id)
   end
 end
