@@ -1,48 +1,95 @@
-マッチング一覧
 <% if @permiters.any? %>
   <% @permiters.each do |teacher| %>
-  <div class="panel panel-default">
-    <div class="panel-heading text-center">
-      *プロフィール画像が入る
-    </div>
-    <div class="mannaka">
-      <div class="panel-body">
-      <%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %><br>
-      <% if @messages.any? %>
-        <% @messages.where(teacher_id: teacher.id).each do |message| %>
-          <%= message.message %><br>
-          <%= message.created_at.strftime("%m-%d %H:%M") %><br>
-        <% end %>
-      <% end %>
+<div class="row">
+ <div class="col-md-4">
+   <table class="table">
+     <thead>
+         <tr>
+             <th>Name</th>
+             <th>Message</th>
+         </tr>
+     </thead>
+     <tbody>
+         <!-- 行全体を灰色に -->
+         <tr class="active">
+             <td><%= teacher.name %></td>
+             <td></td>
+         </tr>
+     </tbody>
+ </table>
+ </div>
+ <div class="col-md-6">
+マッチング一覧
 
-      <%= form_for(@message) do |f| %>
-        <%= f.hidden_field :teacher_id, :value=>  teacher.id %>
-        <%= f.text_field :message %>
-        <%= f.submit "送信" %>
-      <% end %>
-      <!--
-      <%# if @isRoom == true %>
-        <p><a href="/rooms/<%#= @roomId %>">チャットへ</a>
-      <%# else %>
-      <%#= form_for(current_student.rooms.build) do |f| %>
-        <%#= f.hidden_field :teacher_id, :value=> teacher.id %>
-        <%#= f.submit "チャットを始める" %>
-     <%# end %>
-     -->
-     <%# end %>
+<h3 id="me" user_id="1"><%= current_student.name %></h3>
+    <h3 id="partner" thread_id="1"><%= link_to "#{teacher.name}", teachers_teacher_path(teacher) %><br></h3>
+    <br>
+        <!-- チャットの外側部分① -->
+        <div id="bms_messages_container">
+            <!-- ヘッダー部分② -->
+            <div id="bms_chat_header">
+                <!--ステータス-->
+                <div id="bms_chat_user_status">
+                    <!--ステータスアイコン-->
+                    <div id="bms_status_icon">顔画像</div>
+                    <!--ユーザー名-->
+                    <div id="bms_chat_user_name"><%= teacher.name %></div>
+                </div>
+            </div>
 
+            <!-- タイムライン部分③ -->
+            <div id="bms_messages">
 
+                <!--メッセージ１（左側）-->
+            <% if @receivemessages.any? %>
+              <% @receivemessages.where(user_type: "Teacher", teacher_id: teacher.id).each do |message| %>
+                <div class="bms_message bms_left">
+                    <div class="bms_message_box">
+                        <div class="bms_message_content">
+                            <div class="bms_message_text">
+                                  <%= message.message %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
+                <span><%= time_ago_in_words(message.created_at) %></span><br>
+                <% end %>
+              <% end %>
 
-<%= link_to "一覧に戻る", root_path %>
+                <!--メッセージ２（右側）-->
+              <% if @sendmessages.any? %>
+                <% @sendmessages.where(user_type: "Student", teacher_id: teacher.id).each do |message| %>
+                <div class="bms_message bms_right">
+                    <div class="bms_message_box">
+                        <div class="bms_message_content">
+                            <div class="bms_message_text">
+                              <%= message.message %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
+                <span id="message-time"><%= time_ago_in_words(message.created_at) %></span><br>
+              <% end %>
+            <% end %>
+            </div>
 
+            <!-- テキストボックス、送信ボタン④ -->
+            <div id="bms_send">
+                <div id="bms_send_btn">
+                  <%= form_for(@message) do |f| %>
+                    <%= f.hidden_field :user_type, :value=> "Student" %>
+                    <%= f.hidden_field :teacher_id, :value=> teacher.id %>
+                    <%= f.text_field :message %>
+                    <%= f.submit "送信" %>
+                  <% end %>
+                   <%= link_to "一覧に戻る", root_path %>
+                </div>
+            </div>
+        </div>
 
-      </div>
-
-
-    </div>
-  </div>
-
-
-
-  <% end %>
+ </div>
+</div>
+<% end %>
 <% end %>

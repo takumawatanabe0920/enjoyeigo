@@ -19,8 +19,6 @@ class Student < ApplicationRecord
 
 
 
-
-
   def request(teacher)
     self.requests.find_or_create_by(teacher_id: teacher.id)
   end

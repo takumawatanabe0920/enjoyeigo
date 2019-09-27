@@ -7,16 +7,29 @@
       <div class="mannaka">
         <div class="panel-body">
           <%= link_to "#{student.name}", student_path(student) %><br>
-          <%= time_ago_in_words(current_teacher.relationships.find_by(student_id: student.id).created_at) %>
-          <% if @messages.any? %>
-            <% @messages.each do |message| %>
+          <!--student側のメッセージ-->
+          <% if @sendmessages.any? %>
+            <% @sendmessages.where(user_type: "Teacher", student_id: student.id).each do |message| %>
               <%= message.message %><br>
               <%= message.created_at.strftime("%m-%d %H:%M") %><br>
             <% end %>
           <% end %>
+
+          <div class="">
+            相手
+            <% if @receivemessages.any? %>
+              <% @receivemessages.where(user_type: "Student", student_id: student.id).each do |message| %>
+                <%= message.message %><br>
+                <%= message.created_at.strftime("%m-%d %H:%M") %><br>
+              <% end %>
+            <% end %>
+          </div>
+
+
           <%= link_to "一覧に戻る", teachers_root_path %>
 
-          <%= form_for [:teachers, @message] do |f|%>
+          <%= form_for [:teachers, @teacher, @message] do |f|%>
+            <%= f.hidden_field :user_type, :value=> "Teacher" %>
             <%= f.hidden_field :student_id, :value=>  student.id %>
             <%= f.text_field :message %>
             <%= f.submit "送信" %>

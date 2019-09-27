@@ -37,10 +37,6 @@
               <%= render "toppages/news", notifications: @notifications %>
             </ul>
           </li>
-          <li><%= link_to 'マイページ', student_path(current_student)%>
-          </li>
-          <li><%= link_to "ログアウト", destroy_student_session_path, method: :delete %>
-          </li>
           <li>
           <% if current_student.billing %>
             <li><%= link_to permiters_student_path(current_student) do %>

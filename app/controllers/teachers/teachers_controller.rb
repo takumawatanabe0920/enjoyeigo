@@ -27,8 +27,8 @@ class Teachers::TeachersController < ApplicationController
     @permits = current_teacher.permits.page(params[:page])
     @message = Message.new
     @teacher = current_teacher
-    @messages = current_teacher.reverses_of_message
-    @sendmessages = Message.all.where(teacher_id: current_teacher.id)
+    @sendmessages = current_teacher.reverses_of_message.order("created_time DESC")
+    @receivemessages = Message.order("created_time DESC").where(teacher_id: current_teacher)
   end
 
   private

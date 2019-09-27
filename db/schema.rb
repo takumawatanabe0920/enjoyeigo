@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_104324) do
     t.bigint "student_id"
     t.bigint "teacher_id"
     t.text "message"
+    t.string "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_messages_on_student_id"
