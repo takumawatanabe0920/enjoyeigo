@@ -17,8 +17,6 @@ class Student < ApplicationRecord
 
 
 
-
-
   def request(teacher)
     self.requests.find_or_create_by(teacher_id: teacher.id)
   end
@@ -35,6 +33,4 @@ class Student < ApplicationRecord
   def permiters?(teacher)
     self.permiters.include?(teacher)
   end
-
-
 end

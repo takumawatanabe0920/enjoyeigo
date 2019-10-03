@@ -26,7 +26,8 @@ class Teachers::ProfilesController < ApplicationController
 
   def update
     @teacher.update(teacher_params)
-    redirect_to teachers_root_path
+
+    redirect_to teachers_teacher_path(@teacher)
   end
 
   private

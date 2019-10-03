@@ -7,15 +7,14 @@ require "pry"
   end
 
   def requestings
-    @student = Student.find(params[:id])
-    @requestings = @student.requestings.page(params[:page])
-    counts(@student)
+
+    @requestings = current_student.requestings.page(params[:page])
+    
   end
 
   def permiters
     @permiters = current_student.permiters.page(params[:page])
     @message = Message.new
-    @sendmessages =  current_student.messages.order("created_at ASC")
-    @receivemessages = Message.order("created_at ASC").where(student_id: current_student.id)
+    @messages = Message.where(student_id: current_student.id)
   end
 end

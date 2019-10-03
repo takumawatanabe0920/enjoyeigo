@@ -39,40 +39,38 @@
 
             <!-- タイムライン部分③ -->
             <div id="bms_messages">
-
-                <!--メッセージ１（左側）-->
-            <% if @receivemessages.any? %>
-              <% @receivemessages.where(:user_type => "Teacher", :teacher_id => teacher.id).each do |message| %>
-                <div class="bms_message bms_left">
-                    <div class="bms_message_box">
-                        <div class="bms_message_content">
-                            <div class="bms_message_text">
-                                  <%= message.message %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
-                <span><%= time_ago_in_words(message.created_at) %></span><br>
+              <% @messages.each do |message| %>
+              <% if message.teacher_id == teacher.id %>
+              <!--メッセージ１（左側）-->
+              <% if message.user_type == "Teacher" %>
+                  <div class="bms_message bms_left">
+                      <div class="bms_message_box">
+                          <div class="bms_message_content">
+                              <div class="bms_message_text">
+                                    <%= message.message %>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
+                  <span><%= time_ago_in_words(message.created_at) %></span><br>
                 <% end %>
-              <% end %>
 
-                <!--メッセージ２（右側）-->
-              <% if @sendmessages.any? %>
-                <% @sendmessages.where(teacher_id: teacher.id).each do |message| %>
-                <div class="bms_message bms_right">
-                    <div class="bms_message_box">
-                        <div class="bms_message_content">
-                            <div class="bms_message_text">
-                              <%= message.message %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
-                <span id="message-time"><%= time_ago_in_words(message.created_at) %></span><br>
+                <% if message.user_type == "Student" %>
+                 <div class="bms_message bms_right">
+                     <div class="bms_message_box">
+                         <div class="bms_message_content">
+                             <div class="bms_message_text">
+                               <%= message.message %>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="bms_clear"></div><!-- 回り込みを解除（スタイルはcssで充てる） -->
+                 <span id="message-time"><%= time_ago_in_words(message.created_at) %></span><br>
+               <% end %>
               <% end %>
-            <% end %>
+             <% end %>
             </div>
 
             <!-- テキストボックス、送信ボタン④ -->
@@ -91,5 +89,6 @@
 
  </div>
 </div>
+
 <% end %>
 <% end %>
