@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>EnjoyEigo</title>
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,10 +11,10 @@
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="bmesse.css" />
+
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
     <script src="https://express.heartrails.com/api/express.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -29,7 +31,7 @@
 
 
       <%= yield %>
-    <p id="toPageTop"><a href="#container"><img src="images/toppage.png" height="25" width="100"></a></p>
+    
     <%= render 'layouts/footer' %>
     <script>
       var add_link = function() {

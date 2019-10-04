@@ -1,4 +1,5 @@
 class Teachers::ProfilesController < ApplicationController
+  require "pry"
   layout "teacher"
   before_action :not_access
 

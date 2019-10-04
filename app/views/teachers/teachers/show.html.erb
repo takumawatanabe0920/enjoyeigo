@@ -10,14 +10,18 @@
          氏名：<%= @teacher.name %><br>
          メールアドレス：<%= @teacher.email %><br>
          登録日時：<%= @teacher.created_at %><br>
-         <%# if current_teacher %>
+         <% if @teacher.contact.present? %>
          電話番号：<%= @teacher.contact.phonenumber %><br>
          メールアドレス(pc)：<%= @teacher.contact.mailaddress1 %><br>
          メールアドレス２：<%= @teacher.contact.mailaddress2 %><br>
+         <% end %>
+         <% if @teacher.address.present? %>
          郵便番号：<%= @teacher.address.zip %><br>
          都道府県：<%= @teacher.address.pref %><br>
          市区町村：<%= @teacher.address.city %><br>
          それ以下：<%= @teacher.address.addr %><br>
+         <% end %>
+         <% if @teacher.personalinfo.present? %>
          出身国：<%= @teacher.personalinfo.national %><br>
          性別：<% if @teacher.personalinfo.sex == 1 %>
                 男
@@ -27,11 +31,11 @@
                 おかま
               <% end %><br>
          誕生日：<%= @teacher.personalinfo.birthday %><br>
+         <% end %>
+         都道府県：<%= @teacher.prefecture.name if @teacher.prefecture.present? %><br>
+         沿線：<%= @teacher.station_line.name if @teacher.station_line.present? %>
+         駅：<%= @teacher.station.name if @teacher.station.present? %>
 
-         都道府県：<%= @teacher.prefecture.name %><br>
-         沿線：<%= @teacher.station_line.name %>
-         駅：<%= @teacher.station.name %>
-         <%# end %>
        </div>
 
        <div>
