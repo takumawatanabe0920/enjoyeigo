@@ -1,0 +1,33 @@
+<%= form_for @inquiry, :url => inquirys_confirm_path do |f| %>
+  <div class="page-header">
+    <h1>問い合わせ画面</h1>
+  </div>
+
+  <% if @inquiry.errors.any? %>
+    <strong>入力画面にエラーがあります</strong>
+    <%= render "layouts/error_messages", model: f.object %>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th>名前<span class="text-danger"> (必須)</span></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+
+    <tr>
+      <th>メールアドレス<span class="text-danger"> (必須)</span></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+
+    <tr>
+      <th>電話番号</th>
+      <td><%= f.number_field :phone %></td>
+    </tr>
+
+    <tr>
+      <th>問い合わせ内容 (必須)</th>
+      <td><%= f.text_area :content %></td>
+    </tr>
+  </table>
+  <%= f.submit '確認', class: 'btn btn-primary' %>
+<% end %>

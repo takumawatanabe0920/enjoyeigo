@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'messages/create'
   devise_for :admins
   devise_for :teachers
   devise_for :students
@@ -50,5 +49,9 @@ Rails.application.routes.draw do
 
    resources :messages, only: [:create]
 
-
+   get "inquirys" => 'inquirys#index'
+   get 'inquirys/confirm' => redirect("/inquirys")
+   get 'inquirys/thanks' => redirect("/inquirys")
+   post "inquirys/confirm" => "inquirys#confirm"
+   post "inquirys/thanks" => "inquirys#thanks"
 end
