@@ -80,7 +80,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise"
 
-gem 'rake', '< 11.0'
+gem 'rake', '< 13.0'
 
 
 
